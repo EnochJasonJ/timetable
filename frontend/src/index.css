@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-primary: #4f46e5;
+  --color-brand-secondary: #7c3aed;
+  --color-sidebar-bg: #0f172a;
+}
+
+/* Global styles */
+body {
+  @apply bg-slate-50 text-slate-900 font-sans;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.writing-vertical {
+  writing-mode: vertical-rl;
+}
+
