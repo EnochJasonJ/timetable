@@ -7,7 +7,7 @@ import {
     Layers, DoorOpen, Calendar, AlertTriangle,
     PlusCircle, ArrowRight, Clock, MapPin, 
     AlertCircle, CheckCircle2, MoreVertical,
-    Activity, ShieldAlert
+    Activity, ShieldAlert,ChevronRight
 } from 'lucide-react';
 
 const Dashboard = () => {
@@ -84,7 +84,7 @@ const Dashboard = () => {
                                 <PlusCircle size={20} /> Generate Timetable
                             </button>
                             <button 
-                                onClick={() => navigate('/timetables')}
+                                onClick={() => navigate('/timetables/master')}
                                 className="px-6 py-3 bg-white/20 backdrop-blur-md text-white border border-white/30 rounded-2xl font-bold flex items-center gap-2 hover:bg-white/30 transition-all active:scale-95"
                             >
                                 <LayoutDashboard size={20} /> Master View

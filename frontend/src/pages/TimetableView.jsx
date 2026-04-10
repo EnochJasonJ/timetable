@@ -55,6 +55,15 @@ const TimetableView = () => {
         }
     };
 
+    const handleExport = () => {
+        // Open the Django backend download URL in a new tab
+        window.open(`http://localhost:8000/timetables/${id}/download/`, '_blank');
+    };
+
+    const handlePrint = () => {
+        window.print();
+    };
+
     if (loading) return (
         <div className="flex flex-col items-center justify-center min-h-[400px]">
             <div className="animate-spin rounded-full h-12 w-12 border-4 border-indigo-600 border-t-transparent shadow-lg"></div>
@@ -92,85 +101,76 @@ const TimetableView = () => {
 
     return (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            {/* Header / Actions matching Photo 3 */}
-            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-                <div className="space-y-4">
-                    <button onClick={() => navigate('/timetables')} className="group inline-flex items-center gap-2 text-xs font-black text-indigo-600 bg-indigo-50 px-4 py-2 rounded-xl hover:bg-indigo-600 hover:text-white transition-all shadow-sm">
-                        <ArrowLeft size={16} /> BACK TO ARCHIVE
+            {/* Header / Actions */}
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-200">
+                <div className="space-y-3">
+                    <button onClick={() => navigate('/timetables')} className="group inline-flex items-center gap-2 text-[10px] font-bold text-slate-500 hover:text-indigo-600 transition-colors uppercase tracking-[2px]">
+                        <ArrowLeft size={14} /> Back to Archive
                     </button>
-                    <div>
-                        <div className="flex items-center gap-3 mb-1">
-                             <h1 className="text-4xl font-black text-slate-900 tracking-tight leading-none">{timetable?.section_label}</h1>
-                             <span className={`px-3 py-1 rounded-lg text-[10px] font-black tracking-[2px] border uppercase
-                                ${timetable?.status === 'PUBLISHED' ? 'bg-emerald-500 text-white border-emerald-600' : 
-                                'bg-amber-500 text-white border-amber-600'}
-                             `}>
-                                {timetable?.status}
-                             </span>
-                        </div>
-                        <div className="flex flex-wrap items-center gap-4 text-slate-400 font-bold text-[10px] uppercase tracking-[2px] mt-2">
-                            <span className="flex items-center gap-1.5"><Calendar size={12} /> AY 2025-26</span>
-                            <span className="w-1 h-1 rounded-full bg-slate-300" />
-                            <span className="flex items-center gap-1.5"><Layers size={12} /> {timetable?.program_name}</span>
-                            <span className="w-1 h-1 rounded-full bg-slate-300" />
-                            <span className="text-indigo-600 font-black">Accuracy Score: 98.2%</span>
-                        </div>
+                    <div className="flex items-center gap-4">
+                        <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">{timetable?.section_label}</h1>
+                        <span className={`px-2.5 py-0.5 rounded text-[10px] font-bold tracking-widest border uppercase
+                            ${timetable?.status === 'PUBLISHED' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 
+                            'bg-amber-50 text-amber-700 border-amber-200'}
+                        `}>
+                            {timetable?.status}
+                        </span>
+                    </div>
+                    <div className="flex items-center gap-4 text-slate-400 font-medium text-[10px] uppercase tracking-widest">
+                        <span className="flex items-center gap-1.5"><Calendar size={12} className="text-slate-300" /> AY 2025-26</span>
+                        <div className="w-1 h-1 rounded-full bg-slate-200" />
+                        <span className="flex items-center gap-1.5 font-semibold text-indigo-600/70">Optimization Level: 98%</span>
                     </div>
                 </div>
                 
-                <div className="flex flex-wrap items-center gap-3">
+                <div className="flex items-center gap-2 print:hidden">
                     {timetable?.status === 'DRAFT' && (
-                        <button onClick={() => handleAction('PUBLISHED')} className="px-6 py-3 bg-indigo-600 text-white text-xs font-black uppercase tracking-widest rounded-2xl shadow-xl shadow-indigo-200 hover:bg-indigo-700 active:scale-95 transition-all flex items-center gap-2">
-                             <CheckCircle2 size={18} /> Publish Official
+                        <button onClick={() => handleAction('PUBLISHED')} className="px-5 py-2.5 bg-indigo-600 text-white text-[11px] font-bold uppercase tracking-widest rounded-lg shadow-sm hover:bg-indigo-700 active:scale-95 transition-all flex items-center gap-2">
+                             <CheckCircle2 size={16} /> Mark as Official
                         </button>
                     )}
-                    <button className="px-5 py-3 bg-white border border-slate-200 text-slate-700 text-xs font-black uppercase tracking-widest rounded-2xl hover:bg-slate-50 transition-all flex items-center gap-2 shadow-sm">
-                        <Download size={18} /> PDF Export
+                    <button onClick={handleExport} className="px-4 py-2.5 bg-white border border-slate-200 text-slate-600 text-[11px] font-bold uppercase tracking-widest rounded-lg hover:bg-slate-50 transition-all flex items-center gap-2 shadow-sm">
+                        <Download size={16} /> Export
                     </button>
-                    <button className="p-3 bg-white border border-slate-200 text-slate-600 rounded-2xl hover:bg-slate-50 transition-all shadow-sm">
-                        <Printer size={18} />
+                    <button onClick={handlePrint} className="p-2.5 bg-white border border-slate-200 text-slate-400 rounded-lg hover:bg-slate-50 transition-all shadow-sm">
+                        <Printer size={16} />
                     </button>
                 </div>
             </div>
 
-            {/* Timetable Grid Overhaul matching Photo 3 */}
-            <div className="bg-white rounded-[3rem] border border-slate-200/80 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.05)] overflow-hidden">
+            {/* Timetable Grid */}
+            <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-center border-collapse min-w-[1200px] table-fixed">
                         <thead>
-                            <tr className="bg-slate-900 text-white">
-                                <th className="p-8 border-r border-white/5 w-40 bg-indigo-600">
-                                    <div className="text-[10px] font-black uppercase tracking-[3px] text-indigo-100">Schedule</div>
-                                    <div className="text-lg font-black mt-1">Matrix</div>
+                            <tr className="bg-slate-50 text-slate-600 border-b border-slate-200">
+                                <th className="p-6 border-r border-slate-200 w-40 bg-slate-100/50">
+                                    <div className="text-[10px] font-bold uppercase tracking-[2px] text-slate-400">Timeline</div>
                                 </th>
                                 {slots.map(s => (
-                                    <th key={s.id} className="p-8 border-r border-white/5 last:border-0 font-black relative overflow-hidden group">
-                                        <div className="absolute inset-0 bg-white/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                                        <div className="relative text-xs tracking-[2px] uppercase opacity-60">Period {s.slot_number}</div>
-                                        <div className="relative text-base font-black mt-1">{s.start_time.slice(0,5)} — {s.end_time.slice(0,5)}</div>
-                                        {s.slot_type !== 'REGULAR' && (
-                                            <div className="absolute top-0 left-0 w-full h-1 bg-amber-400" />
-                                        )}
+                                    <th key={s.id} className="p-6 border-r border-slate-200 last:border-0 font-bold">
+                                        <div className="text-[10px] tracking-widest uppercase text-slate-400 mb-1 font-semibold">Period {s.slot_number}</div>
+                                        <div className="text-sm font-extrabold text-slate-900 tracking-tight">{s.start_time.slice(0,5)} — {s.end_time.slice(0,5)}</div>
                                     </th>
                                 ))}
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-100">
+                        <tbody className="divide-y divide-slate-200">
                             {['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'].map(dayName => {
                                 const dayCode = dayName.slice(0,3);
                                 return (
-                                    <tr key={dayName} className="group/row bg-white hover:bg-slate-50/50 transition-colors">
-                                        <td className="p-8 border-r border-slate-100 font-black text-slate-900 bg-slate-50/30 uppercase text-[10px] tracking-[3px] group-hover/row:text-indigo-600 transition-colors">
+                                    <tr key={dayName} className="group/row bg-white hover:bg-slate-50/30 transition-colors">
+                                        <td className="p-6 border-r border-slate-200 font-bold text-slate-500 bg-slate-50/50 uppercase text-[10px] tracking-[2px]">
                                             {dayName}
                                         </td>
-                                        {slots.map(s => {
+                                        {slots.map((s, idx) => {
                                             const cell = gridData[dayCode]?.[s.slot_number];
                                             
                                             if (['BREAK', 'LUNCH'].includes(s.slot_type)) {
                                                 return (
-                                                    <td key={s.id} className="p-2 border-r border-slate-100 bg-[#F8FAFF] relative overflow-hidden">
-                                                        <div className="absolute inset-0 opacity-[0.2] mix-blend-multiply" style={{ backgroundImage: 'repeating-linear-gradient(45deg, #e2e8f0 0, #e2e8f0 1px, transparent 0, transparent 10px)' }} />
-                                                        <div className="relative writing-vertical mx-auto h-32 rotate-180 transform font-black text-[12px] text-slate-300 uppercase tracking-[6px] opacity-40 select-none">
+                                                    <td key={s.id} className="p-2 border-r border-slate-200 bg-slate-50/80 relative overflow-hidden">
+                                                        <div className="absolute inset-0 opacity-[0.03] mix-blend-multiply" style={{ backgroundImage: 'repeating-linear-gradient(45deg, #000 0, #000 1px, transparent 0, transparent 10px)' }} />
+                                                        <div className="relative writing-vertical mx-auto h-32 rotate-180 transform font-bold text-[10px] text-slate-300 uppercase tracking-[4px] select-none">
                                                             {s.slot_type}
                                                         </div>
                                                     </td>
@@ -178,48 +178,46 @@ const TimetableView = () => {
                                             }
 
                                             if (!cell) {
-                                                return <td key={s.id} className="p-2 border-r border-slate-100 group/slot relative">
-                                                    <div className="mx-auto w-6 h-1 bg-slate-100 rounded-full" />
+                                                return <td key={s.id} className="p-2 border-r border-slate-200 relative">
+                                                    <div className="mx-auto w-1 h-1 bg-slate-100 rounded-full" />
                                                 </td>;
                                             }
 
-                                            if (cell.is_continuation) {
-                                                return <td key={s.id} className={`p-2 border-r border-slate-100 ${cell.subject_type === 'LAB' ? 'bg-emerald-50/20' : 'bg-indigo-50/20'}`}></td>;
-                                            }
+                                            if (cell.is_continuation) return null;
 
-                                            const colSpan = cell.duration_slots;
                                             const isLab = cell.subject_type === 'LAB';
+                                            const colSpan = cell.duration_slots;
 
                                             return (
-                                                <td key={s.id} className="p-4 border-r border-slate-100 relative group/cell" colSpan={1}>
+                                                <td key={s.id} className="p-2 border-r border-slate-200 relative group/cell" colSpan={colSpan}>
                                                     <div className={`
-                                                        p-5 rounded-[2rem] border-2 transition-all duration-500 cursor-pointer flex flex-col items-center gap-4 relative overflow-hidden group-hover/cell:scale-[1.02] group-hover/cell:shadow-2xl
+                                                        p-4 rounded-lg border transition-all duration-200 flex flex-col items-center gap-3 relative overflow-hidden h-full
                                                         ${isLab 
-                                                            ? 'bg-emerald-50/80 border-emerald-200 text-emerald-900 shadow-emerald-500/5 hover:border-emerald-500 group-hover/cell:shadow-emerald-500/10' 
-                                                            : 'bg-white border-slate-100 text-slate-900 shadow-indigo-500/5 hover:border-indigo-500 group-hover/cell:shadow-indigo-500/10'}
+                                                            ? 'bg-emerald-50/40 border-emerald-100 text-emerald-900 shadow-sm' 
+                                                            : 'bg-indigo-50/30 border-indigo-100 text-slate-900 shadow-sm'}
                                                     `}>
-                                                        <div className={`absolute top-0 left-0 w-full h-1.5 ${isLab ? 'bg-emerald-500' : 'bg-indigo-600'}`} />
+                                                        <div className={`absolute top-0 left-0 w-full h-1 ${isLab ? 'bg-emerald-400' : 'bg-indigo-500'}`} />
                                                         
-                                                        <div className="text-center space-y-1">
-                                                            <span className="block text-[10px] font-black uppercase tracking-widest text-slate-400 leading-none">Module</span>
-                                                            <span className="block font-black text-xs leading-tight tracking-tight uppercase group-hover/cell:text-indigo-600 transition-colors">{cell.subject_name}</span>
+                                                        <div className="text-center">
+                                                            <span className="block text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-0.5">Course</span>
+                                                            <span className="block font-bold text-xs leading-tight tracking-tight uppercase text-slate-800">{cell.subject_name}</span>
+                                                            <span className="block text-[9px] font-medium text-slate-400 uppercase tracking-tighter mt-1">{cell.subject_code}</span>
                                                         </div>
                                                         
-                                                        <div className="flex flex-col gap-2 w-full pt-4 border-t border-slate-100 items-center">
-                                                            <div className="flex items-center gap-2 px-3 py-1 bg-slate-50 rounded-full border border-slate-100">
-                                                                <UserIcon size={12} className="text-slate-400" />
-                                                                <span className="text-[9px] font-black uppercase tracking-wider text-slate-600 truncate max-w-[80px]">{cell.faculty_name || 'TBA'}</span>
+                                                        <div className="flex flex-col gap-1.5 w-full pt-3 border-t border-slate-200/50 items-center mt-auto">
+                                                            <div className="flex items-center gap-1.5">
+                                                                <UserIcon size={10} className="text-slate-400" />
+                                                                <span className="text-[9px] font-bold uppercase tracking-wide text-slate-500 truncate max-w-[100px]">{cell.faculty_name || 'TBA'}</span>
                                                             </div>
-                                                            <div className="flex items-center gap-2 text-slate-400">
-                                                                <MapPin size={12} />
-                                                                <span className="text-[9px] font-black uppercase tracking-widest leading-none">{cell.room_name || 'Main Hall'}</span>
+                                                            <div className="flex items-center gap-1.5 text-slate-400">
+                                                                <MapPin size={10} className="opacity-50" />
+                                                                <span className="text-[9px] font-bold uppercase tracking-widest leading-none">{cell.room_name || 'Hall A'}</span>
                                                             </div>
                                                         </div>
 
                                                         {colSpan > 1 && (
-                                                            <div className="absolute top-2 right-4 flex items-center gap-1">
-                                                                <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
-                                                                <span className="text-[8px] font-black text-indigo-600 uppercase tracking-widest">Extended</span>
+                                                            <div className="absolute top-1.5 right-1.5 flex items-center gap-1 px-1.5 py-0.5 bg-white/60 rounded border border-white/80">
+                                                                <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Lab</span>
                                                             </div>
                                                         )}
                                                     </div>
@@ -236,33 +234,33 @@ const TimetableView = () => {
 
             {/* Stats Summary Footer */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-white p-8 rounded-[2.5rem] border border-slate-200/70 shadow-sm flex items-center gap-6">
-                    <div className="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-3xl flex items-center justify-center shadow-inner">
-                        <Clock size={32} />
+                <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex items-center gap-5">
+                    <div className="w-12 h-12 bg-slate-50 text-slate-400 rounded-lg flex items-center justify-center border border-slate-100">
+                        <Clock size={24} />
                     </div>
                     <div>
-                        <p className="text-2xl font-black text-slate-900 tracking-tight">42 hrs</p>
-                        <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Total Lectures</p>
+                        <p className="text-xl font-extrabold text-slate-900 tracking-tight">42 hrs</p>
+                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">Contact Hours / Week</p>
                     </div>
                 </div>
-                <div className="bg-white p-8 rounded-[2.5rem] border border-slate-200/70 shadow-sm flex items-center gap-6">
-                    <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-3xl flex items-center justify-center shadow-inner">
-                        <CheckCircle2 size={32} />
+                <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex items-center gap-5">
+                    <div className="w-12 h-12 bg-emerald-50 text-emerald-500 rounded-lg flex items-center justify-center border border-emerald-100">
+                        <CheckCircle2 size={24} />
                     </div>
                     <div>
-                        <p className="text-2xl font-black text-slate-900 tracking-tight">0 Clashes</p>
-                        <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Conflict Integrity</p>
+                        <p className="text-xl font-extrabold text-slate-900 tracking-tight">Validated</p>
+                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">0 Conflict Integrity</p>
                     </div>
                 </div>
-                <div className="bg-slate-900 p-8 rounded-[2.5rem] shadow-2xl flex items-center gap-6 group hover:bg-slate-800 transition-all cursor-pointer">
-                    <div className="w-16 h-16 bg-indigo-500 text-white rounded-3xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <Share2 size={32} />
+                <div className="bg-[#0F172A] p-6 rounded-xl shadow-md flex items-center gap-5 group hover:bg-slate-900 transition-all cursor-pointer border border-slate-800">
+                    <div className="w-12 h-12 bg-indigo-600 text-white rounded-lg flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform">
+                        <Share2 size={24} />
                     </div>
                     <div className="flex-1">
-                        <p className="text-lg font-black text-white tracking-tight">Sync Portal</p>
-                        <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Export to ERP</p>
+                        <p className="text-sm font-bold text-white tracking-tight">Cloud Sync</p>
+                        <p className="text-[10px] font-medium text-slate-500 uppercase tracking-widest mt-0.5">External ERP Bridge</p>
                     </div>
-                    <ChevronRight className="text-white opacity-40 group-hover:opacity-100 transition-all" />
+                    <ChevronRight className="text-slate-600 group-hover:text-white transition-colors" size={16} />
                 </div>
             </div>
         </div>

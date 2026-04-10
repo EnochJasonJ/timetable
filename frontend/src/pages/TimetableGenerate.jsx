@@ -44,6 +44,38 @@ const TimetableGenerate = () => {
         }
     };
 
+    const [taskId, setTaskId] = useState(null);
+    const [progress, setProgress] = useState(null);
+
+    useEffect(() => {
+        let interval;
+        if (generating && taskId) {
+            interval = setInterval(async () => {
+                try {
+                    const res = await api.get(`timetables/progress/?task_id=${taskId}`);
+                    setProgress(res.data);
+                    if (!res.data.running) {
+                        setGenerating(false);
+                        setTaskId(null);
+                        // If finished, we can either stay here or redirect. 
+                        // But we don't know the new timetable_id easily if multiple sections were generated.
+                        // Actually, the generator saves results. Let's redirect to the first section's timetable if available.
+                        if (res.data.generation > 0) {
+                            // Fetch recent timetables to find the one we just made
+                            const ttRes = await api.get('timetables/');
+                            if (ttRes.data.length > 0) {
+                                navigate(`/timetables/${ttRes.data[0].id}`);
+                            }
+                        }
+                    }
+                } catch (err) {
+                    console.error('Polling error', err);
+                }
+            }, 1000);
+        }
+        return () => clearInterval(interval);
+    }, [generating, taskId, navigate]);
+
     const handleGenerate = async () => {
         if (selectedSections.size === 0) {
             setError('Please choose at least one academic section to proceed.');
@@ -52,6 +84,7 @@ const TimetableGenerate = () => {
         
         setError('');
         setGenerating(true);
+        setProgress(null);
         
         try {
             const res = await api.post('timetables/generate/', {
@@ -60,9 +93,9 @@ const TimetableGenerate = () => {
             });
             
             if (res.data.success) {
-                navigate(`/timetables/${res.data.timetable_id}`);
+                setTaskId(res.data.task_id);
             } else {
-                setError(res.data.message || 'The algorithm failed to find a valid solution.');
+                setError(res.data.message || 'The algorithm failed to start.');
                 setGenerating(false);
             }
         } catch (err) {
@@ -233,7 +266,17 @@ const TimetableGenerate = () => {
                             `}
                         >
                             {generating ? (
-                                <><Loader2 size={18} className="animate-spin text-indigo-500" /> Computing Matrices...</>
+                                <div className="flex flex-col items-center gap-2">
+                                    <div className="flex items-center gap-3">
+                                        <Loader2 size={18} className="animate-spin text-indigo-500" /> 
+                                        <span>Computing Matrix...</span>
+                                    </div>
+                                    {progress && (
+                                        <div className="text-[9px] text-slate-400 font-bold">
+                                            Gen: {progress.generation}/{progress.total} | Fit: {progress.fitness}%
+                                        </div>
+                                    )}
+                                </div>
                             ) : (
                                 <><PlayCircle size={18} /> Run Algorithm</>
                             )}
