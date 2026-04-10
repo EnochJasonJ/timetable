@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}Faculty — TMS{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <div class="page-breadcrumb"><i class="bi bi-person-badge-fill"></i> <span>Faculty</span></div>
+  <h2>Faculty Members</h2>
+  <p>Manage teaching staff across departments.</p>
+</div>
+
+<form method="get" class="filter-bar">
+  <label>Department:</label>
+  <select name="department" onchange="this.form.submit()">
+    <option value="">All Departments</option>
+    {% for dept in departments %}
+    <option value="{{ dept.id }}" {% if filter_department == dept.id|stringformat:"d" %}selected{% endif %}>{{ dept.code }} — {{ dept.name }}</option>
+    {% endfor %}
+  </select>
+</form>
+
+<div class="grid-2">
+  <div class="card">
+    <div class="card-header"><div class="card-title">Add Faculty</div></div>
+    <form method="post">
+      {% csrf_token %}
+      <div class="django-form">{{ form.as_p }}</div>
+      <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-plus-circle-fill"></i> Add Faculty</button>
+    </form>
+  </div>
+  <div class="card">
+    <div class="card-header"><div class="card-title">Overview</div></div>
+    <div class="stat-card" style="box-shadow:none; border:none; padding:14px;">
+      <div class="stat-value">{{ faculty_members|length }}</div>
+      <div class="stat-label">Faculty Members</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="padding:0; overflow:hidden; margin-top:20px;">
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>ID</th><th>Name</th><th>Initials</th><th>Department</th><th>Designation</th><th>Email</th><th class="td-actions">Remove</th></tr></thead>
+      <tbody>
+        {% for fac in faculty_members %}
+        <tr>
+          <td><code style="font-weight:600; color:var(--primary);">{{ fac.faculty_id }}</code></td>
+          <td style="font-weight:600;">{{ fac.full_name }}</td>
+          <td><span class="badge badge-primary">{{ fac.initials|default:"—" }}</span></td>
+          <td>{{ fac.department.code|default:"—" }}</td>
+          <td>{{ fac.get_designation_display }}</td>
+          <td style="font-size:0.82rem; color:var(--text-secondary);">{{ fac.email|default:"—" }}</td>
+          <td class="td-actions">
+            <form action="{% url 'faculty_delete' fac.pk %}" method="post">{% csrf_token %}
+              <button type="submit" class="btn btn-icon btn-danger btn-sm" onclick="return confirm('Delete {{ fac.full_name }}?')"><i class="bi bi-trash3-fill"></i></button>
+            </form>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="7"><div class="empty-state"><i class="bi bi-person-badge"></i><h3>No Faculty</h3><p>Add teaching staff to begin scheduling.</p></div></td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

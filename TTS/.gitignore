@@ -1,0 +1,14 @@
+__pycache__/
+secret_key.txt
+venv
+/venv
+
+*.sqlite3
+
+*.py[cod]
+*$py.class
+.env
+.vscode/
+.idea/
+build/
+dist/

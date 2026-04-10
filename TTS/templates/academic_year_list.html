@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Academic Years — TMS{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <div class="page-breadcrumb"><i class="bi bi-calendar-range-fill"></i> <span>Academic Years</span></div>
+  <h2>Academic Years</h2>
+  <p>Define academic year periods and set the active year.</p>
+</div>
+
+<div class="grid-2">
+  <div class="card">
+    <div class="card-header"><div class="card-title">Add Academic Year</div></div>
+    <form method="post">
+      {% csrf_token %}
+      <div class="django-form">{{ form.as_p }}</div>
+      <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-plus-circle-fill"></i> Add Year</button>
+    </form>
+  </div>
+  <div class="card">
+    <div class="card-header"><div class="card-title">Current Year</div></div>
+    {% if active_academic_year %}
+    <div style="text-align:center; padding:20px;">
+      <div style="font-size:1.4rem; font-weight:700; color:var(--primary);">{{ active_academic_year.label }}</div>
+      <div style="font-size:0.82rem; color:var(--text-secondary); margin-top:4px;">{{ active_academic_year.start_date|date:"M d, Y" }} – {{ active_academic_year.end_date|date:"M d, Y" }}</div>
+    </div>
+    {% else %}
+    <div class="empty-state" style="padding:20px;"><p>No active academic year set.</p></div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="card" style="padding:0; overflow:hidden; margin-top:20px;">
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Label</th><th>Start</th><th>End</th><th>Status</th><th class="td-actions">Remove</th></tr></thead>
+      <tbody>
+        {% for yr in years %}
+        <tr>
+          <td style="font-weight:600;">{{ yr.label }}</td>
+          <td>{{ yr.start_date|date:"M d, Y" }}</td>
+          <td>{{ yr.end_date|date:"M d, Y" }}</td>
+          <td>{% if yr.is_current %}<span class="badge badge-published">Active</span>{% else %}<span class="badge badge-archived">Inactive</span>{% endif %}</td>
+          <td class="td-actions">
+            <form action="{% url 'academic_year_delete' yr.pk %}" method="post">{% csrf_token %}
+              <button type="submit" class="btn btn-icon btn-danger btn-sm" onclick="return confirm('Delete {{ yr.label }}?')"><i class="bi bi-trash3-fill"></i></button>
+            </form>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5"><div class="empty-state"><i class="bi bi-calendar-x"></i><h3>No Academic Years</h3><p>Add your first academic year.</p></div></td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

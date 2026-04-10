@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Programs — TMS{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <div class="page-breadcrumb"><i class="bi bi-mortarboard-fill"></i> <span>Programs</span></div>
+  <h2>Academic Programs</h2>
+  <p>Programs offered under each department (e.g., AIML, CSE, ECE).</p>
+</div>
+
+<div class="grid-2">
+  <div class="card">
+    <div class="card-header"><div class="card-title">Add Program</div></div>
+    <form method="post">
+      {% csrf_token %}
+      <div class="django-form">{{ form.as_p }}</div>
+      <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-plus-circle-fill"></i> Add Program</button>
+    </form>
+  </div>
+  <div class="card">
+    <div class="card-header"><div class="card-title">Overview</div></div>
+    <div class="stat-card" style="box-shadow:none; border:none; padding:14px;">
+      <div class="stat-value">{{ programs|length }}</div>
+      <div class="stat-label">Programs</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="padding:0; overflow:hidden; margin-top:20px;">
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Code</th><th>Program Name</th><th>Department</th><th>Duration</th><th class="td-actions">Remove</th></tr></thead>
+      <tbody>
+        {% for prog in programs %}
+        <tr>
+          <td><span class="badge badge-info">{{ prog.code }}</span></td>
+          <td style="font-weight:600;">{{ prog.name }}</td>
+          <td>{{ prog.department.code }}</td>
+          <td>{{ prog.duration_years }} Years</td>
+          <td class="td-actions">
+            <form action="{% url 'program_delete' prog.pk %}" method="post">{% csrf_token %}
+              <button type="submit" class="btn btn-icon btn-danger btn-sm" onclick="return confirm('Delete {{ prog.name }}?')"><i class="bi bi-trash3-fill"></i></button>
+            </form>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5"><div class="empty-state"><i class="bi bi-mortarboard"></i><h3>No Programs</h3><p>Add your first program above.</p></div></td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

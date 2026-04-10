@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Users & Roles — TMS{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <div class="page-breadcrumb"><i class="bi bi-people-fill"></i> <span>Users & Roles</span></div>
+  <h2>User Management</h2>
+  <p>Manage user roles and department assignments.</p>
+</div>
+
+<div class="card" style="padding:0; overflow:hidden;">
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Username</th><th>Full Name</th><th>Role</th><th>Department</th><th>Actions</th></tr></thead>
+      <tbody>
+        {% for p in profiles %}
+        <tr>
+          <td style="font-weight:600;">{{ p.user.username }}</td>
+          <td>{{ p.user.get_full_name|default:"—" }}</td>
+          <td>
+            <span class="badge {% if p.role == 'SUPER_ADMIN' %}badge-published{% elif p.role == 'TIMETABLE_ADMIN' %}badge-info{% elif p.role == 'HOD' %}badge-elective{% elif p.role == 'FACULTY' %}badge-theory{% else %}badge-common{% endif %}">
+              {{ p.get_role_display }}
+            </span>
+          </td>
+          <td>{{ p.department.code|default:"—" }}</td>
+          <td>
+            <a href="{% url 'user_role_edit' p.pk %}" class="btn btn-sm btn-outline">
+              <i class="bi bi-pencil-fill"></i> Edit Role
+            </a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5"><div class="empty-state"><i class="bi bi-people"></i><h3>No User Profiles</h3><p>User profiles are created when users log in.</p></div></td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

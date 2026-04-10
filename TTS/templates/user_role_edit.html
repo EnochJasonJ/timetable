@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Edit Role — TMS{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <div class="page-breadcrumb"><i class="bi bi-people-fill"></i> <span>Users</span> / Edit Role</div>
+  <h2>Edit Role — {{ profile.user.username }}</h2>
+  <p>Update role and department assignment for this user.</p>
+</div>
+
+<div class="form-page-wrap">
+  <div class="card">
+    <form method="post">
+      {% csrf_token %}
+      <div class="django-form">{{ form.as_p }}</div>
+      <div style="display:flex; gap:12px; margin-top:8px;">
+        <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-check-circle-fill"></i> Save Changes</button>
+        <a href="{% url 'user_list' %}" class="btn btn-secondary btn-sm">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

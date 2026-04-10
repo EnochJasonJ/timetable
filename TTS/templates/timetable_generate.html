@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}Generate Timetable — TMS{% endblock %}
+{% block content %}
+{% load static %}
+
+<!-- Loader Overlay -->
+<div class="loader-overlay" id="loaderOverlay">
+  <div class="loader-ring"></div>
+  <div class="loader-counter" id="loaderCounter">0</div>
+  <div class="loader-fitness" id="loaderFitness">Fitness: 0%</div>
+  <div class="loader-text">Generating optimized timetable using AI…</div>
+  <a href="{% url 'api_stop_generation' %}" class="loader-stop">
+    <i class="bi bi-stop-circle-fill"></i> Stop Generation
+  </a>
+</div>
+
+<div class="page-header">
+  <div class="page-breadcrumb">
+    <i class="bi bi-magic"></i>
+    <span>Generate Timetable</span>
+  </div>
+  <h2>Generate Timetable</h2>
+  <p>Select sections and configure generation parameters, then let the AI scheduler create conflict-free timetables.</p>
+</div>
+
+<div class="form-page-wrap" style="max-width: 800px;">
+  <div class="callout callout-info">
+    <i class="bi bi-info-circle-fill"></i>
+    <div>
+      <strong>Before generating:</strong> Ensure you have configured time slots, subjects, sections, course offerings, and assigned faculty. The scheduler uses a genetic algorithm to minimize conflicts.
+    </div>
+  </div>
+
+  <div class="card">
+    <form method="post" id="generateForm">
+      {% csrf_token %}
+      <div class="django-form">
+        {{ form.as_p }}
+      </div>
+      <div style="display: flex; gap: 12px; margin-top: 8px;">
+        <button type="submit" class="btn btn-primary" id="genButton"
+          onclick="document.getElementById('loaderOverlay').classList.add('active')">
+          <i class="bi bi-magic"></i> Generate Timetable
+        </button>
+        <a href="{% url 'timetable_list' %}" class="btn btn-secondary">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+{% block extra_js %}
+<script>
+  // Poll generation progress
+  document.getElementById('genButton')?.addEventListener('click', function() {
+    var interval = setInterval(function() {
+      fetch('/api/gen-progress/')
+        .then(r => r.json())
+        .then(data => {
+          document.getElementById('loaderCounter').textContent = data.generation;
+          document.getElementById('loaderFitness').textContent = 'Fitness: ' + data.fitness + '%';
+          if (!data.running && data.generation > 0) {
+            clearInterval(interval);
+          }
+        })
+        .catch(() => {});
+    }, 800);
+  });
+</script>
+{% endblock %}

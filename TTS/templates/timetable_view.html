@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load index %}
+{% block title %}View Timetable — TMS{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <div class="page-breadcrumb">
+    <i class="bi bi-table"></i>
+    <span>Timetables</span> / View
+  </div>
+  <h2>{{ timetable.section.label }}</h2>
+  <p>
+    {{ timetable.academic_year.label }} · 
+    Semester {{ timetable.section.semester }} ·
+    <span class="badge badge-{{ timetable.status|lower }}">{{ timetable.get_status_display }}</span>
+    · Fitness: {{ timetable.fitness_score|percentage }}
+  </p>
+  <div class="page-header-actions">
+    {% if can_manage %}
+    <form method="post" action="{% url 'timetable_publish' timetable.pk %}" style="display:inline;">
+      {% csrf_token %}
+      {% if timetable.status == 'DRAFT' %}
+      <input type="hidden" name="action" value="publish">
+      <button type="submit" class="btn btn-primary btn-sm">
+        <i class="bi bi-check-circle-fill"></i> Publish
+      </button>
+      {% elif timetable.status == 'PUBLISHED' %}
+      <input type="hidden" name="action" value="archive">
+      <button type="submit" class="btn btn-secondary btn-sm">
+        <i class="bi bi-archive-fill"></i> Archive
+      </button>
+      {% endif %}
+    </form>
+    {% endif %}
+    <a href="{% url 'timetable_download' timetable.pk %}?format=html" target="_blank" class="btn btn-primary btn-sm">
+      <i class="bi bi-download"></i> Download PDF
+    </a>
+    <button onclick="window.print()" class="btn btn-secondary btn-sm">
+      <i class="bi bi-printer-fill"></i> Print
+    </button>
+    <a href="{% url 'timetable_list' %}" class="btn btn-outline btn-sm">
+      <i class="bi bi-arrow-left"></i> Back
+    </a>
+  </div>
+</div>
+
+<!-- Color Legend -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot theory"></div> Theory</div>
+  <div class="legend-item"><div class="legend-dot lab"></div> Laboratory</div>
+  <div class="legend-item"><div class="legend-dot elective"></div> Elective</div>
+  <div class="legend-item"><div class="legend-dot common"></div> Common / Activity</div>
+</div>
+
+<!-- Timetable Grid -->
+<div class="card" style="padding: 0; overflow: hidden;">
+  <div class="table-wrap">
+    <table class="timetable-grid">
+      <thead>
+        <tr>
+          <th>Day / Period</th>
+          {% for slot in slots %}
+            {% if slot.slot_type == 'BREAK' %}
+            <th class="break-col"><span class="break-label">Break</span><span class="slot-time">{{ slot.start_time|time:"h:i A" }}</span></th>
+            {% elif slot.slot_type == 'LUNCH' %}
+            <th class="lunch-col"><span class="break-label">Lunch</span><span class="slot-time">{{ slot.start_time|time:"h:i A" }}</span></th>
+            {% else %}
+            <th>
+              Period {{ slot.slot_number }}
+              <span class="slot-time">{{ slot.start_time|time:"h:i" }} – {{ slot.end_time|time:"h:i" }}</span>
+            </th>
+            {% endif %}
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for day in days %}
+        <tr>
+          <th>{{ day.1 }}</th>
+          {% for slot in slots %}
+            {% if slot.slot_type == 'BREAK' %}
+            <td class="break-cell"><div class="break-marker">☕</div></td>
+            {% elif slot.slot_type == 'LUNCH' %}
+            <td class="lunch-cell"><div class="break-marker">🍽️</div></td>
+            {% else %}
+            <td>
+              {% timetable_cell grid day.0 slot.slot_number as cell %}
+              {% if cell %}
+              <div class="tt-cell {{ cell.subject_type|lower }}{% if cell.is_continuation %} continuation{% endif %}">
+                <span class="tt-subject">{{ cell.subject_short }}</span>
+                <span class="tt-faculty">{{ cell.faculty_name }}</span>
+                <span class="tt-room">{{ cell.room }}</span>
+              </div>
+              {% else %}
+              <span class="tt-empty">—</span>
+              {% endif %}
+            </td>
+            {% endif %}
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

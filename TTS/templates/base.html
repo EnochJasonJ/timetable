@@ -1,0 +1,176 @@
+{% load static %}
+{% load index %}
+
+{% url 'dashboard' as dashboard_url %}
+{% url 'department_list' as dept_url %}
+{% url 'program_list' as prog_url %}
+{% url 'academic_year_list' as ay_url %}
+{% url 'room_list' as room_url %}
+{% url 'timeslot_list' as slot_url %}
+{% url 'faculty_list' as fac_url %}
+{% url 'subject_list' as subj_url %}
+{% url 'section_list' as sec_url %}
+{% url 'offering_list' as offer_url %}
+{% url 'timetable_list' as tt_url %}
+{% url 'timetable_generate' as gen_url %}
+{% url 'master_timetable' as master_url %}
+{% url 'user_list' as user_url %}
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Timetable Management System{% endblock %}</title>
+  <meta name="author" content="TMS">
+  <meta name="description" content="College-wide Timetable Management System — Academic Scheduling Platform">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'CSS/style.css' %}">
+</head>
+
+<body>
+
+  <!-- Mobile hamburger -->
+  <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu">
+    <i class="bi bi-list"></i>
+  </button>
+
+  <!-- Sidebar overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ── Sidebar ─────────────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">
+        <i class="bi bi-calendar3"></i>
+      </div>
+      <h1>Timetable Manager</h1>
+      <span>Academic Scheduling Platform</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <a href="{{ dashboard_url }}" class="{% active request dashboard_url %}">
+        <i class="bi bi-grid-1x2-fill"></i>
+        Dashboard
+      </a>
+
+      {% if user.is_authenticated %}
+      <div class="nav-section-label">Timetables</div>
+      <a href="{{ tt_url }}" class="{% active request tt_url %}">
+        <i class="bi bi-table"></i>
+        All Timetables
+      </a>
+      {% if can_manage %}
+      <a href="{{ gen_url }}" class="{% active request gen_url %}">
+        <i class="bi bi-magic"></i>
+        Generate
+      </a>
+      <a href="{{ master_url }}" class="{% active request master_url %}">
+        <i class="bi bi-layout-wtf"></i>
+        Master Timetable
+      </a>
+      {% endif %}
+
+      <div class="nav-section-label">Academic Setup</div>
+      {% if is_admin %}
+      <a href="{{ dept_url }}" class="{% active request dept_url %}">
+        <i class="bi bi-diagram-3-fill"></i>
+        Departments
+      </a>
+      <a href="{{ prog_url }}" class="{% active request prog_url %}">
+        <i class="bi bi-mortarboard-fill"></i>
+        Programs
+      </a>
+      <a href="{{ ay_url }}" class="{% active request ay_url %}">
+        <i class="bi bi-calendar-range-fill"></i>
+        Academic Years
+      </a>
+      {% endif %}
+      {% if can_manage %}
+      <a href="{{ subj_url }}" class="{% active request subj_url %}">
+        <i class="bi bi-book-fill"></i>
+        Subjects
+      </a>
+      <a href="{{ sec_url }}" class="{% active request sec_url %}">
+        <i class="bi bi-collection-fill"></i>
+        Sections
+      </a>
+      <a href="{{ offer_url }}" class="{% active request offer_url %}">
+        <i class="bi bi-journal-bookmark-fill"></i>
+        Course Offerings
+      </a>
+      {% endif %}
+
+      <div class="nav-section-label">Infrastructure</div>
+      {% if can_manage %}
+      <a href="{{ fac_url }}" class="{% active request fac_url %}">
+        <i class="bi bi-person-badge-fill"></i>
+        Faculty
+      </a>
+      <a href="{{ room_url }}" class="{% active request room_url %}">
+        <i class="bi bi-building-fill"></i>
+        Rooms
+      </a>
+      {% if is_admin %}
+      <a href="{{ slot_url }}" class="{% active request slot_url %}">
+        <i class="bi bi-clock-fill"></i>
+        Time Slots
+      </a>
+      {% endif %}
+      {% endif %}
+
+      {% if is_admin %}
+      <div class="nav-section-label">Administration</div>
+      <a href="{{ user_url }}" class="{% active request user_url %}">
+        <i class="bi bi-people-fill"></i>
+        Users & Roles
+      </a>
+      {% endif %}
+      {% endif %}
+    </nav>
+
+    <div class="sidebar-footer">
+      {% if user.is_authenticated %}
+      <div class="user-info">
+        <div class="user-avatar">{{ user.username|make_list|first|upper }}</div>
+        <div>
+          <div class="user-name">{{ user.get_full_name|default:user.username }}</div>
+          <div class="user-role">{{ user_role_display }}</div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle">
+        <i class="bi bi-moon-fill"></i>
+        <span>Dark Mode</span>
+      </button>
+      <a href="{% url 'logout' %}">
+        <i class="bi bi-box-arrow-left"></i>
+        Sign Out
+      </a>
+      {% endif %}
+    </div>
+  </aside>
+
+  <!-- ── Main Content ────────────────────────────────────── -->
+  <main class="main-content">
+    {% if messages %}
+    <div class="messages-container">
+      {% for message in messages %}
+      <div class="message-alert {{ message.tags }}">
+        <i class="bi bi-{% if message.tags == 'success' %}check-circle-fill{% elif message.tags == 'error' %}exclamation-circle-fill{% elif message.tags == 'warning' %}exclamation-triangle-fill{% else %}info-circle-fill{% endif %}"></i>
+        {{ message }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <script src="{% static 'js/script.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+
+</html>

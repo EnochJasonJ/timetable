@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block title %}Departments — TMS{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <div class="page-breadcrumb"><i class="bi bi-diagram-3-fill"></i> <span>Departments</span></div>
+  <h2>Departments & Programs</h2>
+  <p>Manage academic departments and their associated programs.</p>
+</div>
+
+<div class="grid-2">
+  <!-- Add Form -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Add Department</div>
+    </div>
+    <form method="post">
+      {% csrf_token %}
+      <div class="django-form">{{ form.as_p }}</div>
+      <button type="submit" class="btn btn-primary btn-sm">
+        <i class="bi bi-plus-circle-fill"></i> Add Department
+      </button>
+    </form>
+  </div>
+
+  <!-- Quick Info -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Overview</div>
+    </div>
+    <div style="display:flex; gap:16px;">
+      <div class="stat-card" style="flex:1; box-shadow:none; border:none; padding:14px;">
+        <div class="stat-value">{{ departments|length }}</div>
+        <div class="stat-label">Departments</div>
+      </div>
+    </div>
+    <a href="{% url 'program_list' %}" class="btn btn-outline btn-sm" style="margin-top:12px;">
+      <i class="bi bi-mortarboard-fill"></i> Manage Programs
+    </a>
+  </div>
+</div>
+
+<!-- List -->
+<div class="card" style="padding:0; overflow:hidden; margin-top:20px;">
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Department Name</th>
+          <th>Programs</th>
+          <th class="td-actions">Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for dept in departments %}
+        <tr>
+          <td><span class="badge badge-primary">{{ dept.code }}</span></td>
+          <td style="font-weight:600;">{{ dept.name }}</td>
+          <td>
+            {% for prog in dept.programs.all %}
+            <span class="badge badge-info">{{ prog.code }}</span>
+            {% empty %}<span style="color:var(--text-muted); font-size:0.82rem;">None</span>
+            {% endfor %}
+          </td>
+          <td class="td-actions">
+            <form action="{% url 'department_delete' dept.pk %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-icon btn-danger btn-sm" title="Delete"
+                onclick="return confirm('Delete {{ dept.name }}?')">
+                <i class="bi bi-trash3-fill"></i>
+              </button>
+            </form>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4"><div class="empty-state"><i class="bi bi-diagram-3"></i><h3>No Departments</h3><p>Add your first department above.</p></div></td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

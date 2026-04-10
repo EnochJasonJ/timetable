@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}Time Slots — TMS{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <div class="page-breadcrumb"><i class="bi bi-clock-fill"></i> <span>Time Slots</span></div>
+  <h2>Time Slot Configuration</h2>
+  <p>Define fixed start and end times for each period in the weekly schedule.</p>
+</div>
+
+<div class="grid-2">
+  <div class="card">
+    <div class="card-header"><div class="card-title">Add Time Slot</div></div>
+    <form method="post">
+      {% csrf_token %}
+      <div class="django-form">{{ form.as_p }}</div>
+      <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-plus-circle-fill"></i> Add Slot</button>
+    </form>
+  </div>
+  <div class="card">
+    <div class="card-header"><div class="card-title">Slot Types</div></div>
+    <div style="display:flex; flex-direction:column; gap:8px; padding:8px 0;">
+      <div class="slot-block regular" style="flex-direction:row; justify-content:space-between;">
+        <span class="slot-number">Regular Class</span>
+        <span class="slot-label">Standard lecture slot</span>
+      </div>
+      <div class="slot-block break" style="flex-direction:row; justify-content:space-between;">
+        <span class="slot-number">Break</span>
+        <span class="slot-label">Short break between classes</span>
+      </div>
+      <div class="slot-block lunch" style="flex-direction:row; justify-content:space-between;">
+        <span class="slot-number">Lunch</span>
+        <span class="slot-label">Lunch break</span>
+      </div>
+      <div class="slot-block lab-block" style="flex-direction:row; justify-content:space-between;">
+        <span class="slot-number">Lab Block</span>
+        <span class="slot-label">Multi-slot lab session</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Visual Day Structure -->
+{% for day_name, day_slots in slots_by_day.items %}
+<div class="card" style="margin-top: 16px;">
+  <div class="card-header">
+    <div class="card-title">{{ day_name }}</div>
+    <span class="badge badge-primary">{{ day_slots|length }} slots</span>
+  </div>
+  {% if day_slots %}
+  <div class="slot-timeline">
+    {% for slot in day_slots %}
+    <div class="slot-block {{ slot.get_slot_type_display|lower }}">
+      <span class="slot-number">{{ slot.label|default:slot.slot_number }}</span>
+      <span class="slot-time">{{ slot.start_time|time:"h:i A" }} – {{ slot.end_time|time:"h:i A" }}</span>
+      <span class="slot-label">{{ slot.get_slot_type_display }}</span>
+      <form action="{% url 'timeslot_delete' slot.pk %}" method="post" style="margin-top:4px;">{% csrf_token %}
+        <button type="submit" class="btn btn-icon btn-danger btn-sm" style="width:24px;height:24px;font-size:0.7rem;" onclick="return confirm('Delete this slot?')"><i class="bi bi-x"></i></button>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p style="color:var(--text-muted); font-size:0.85rem; padding:8px 0;">No slots defined for this day.</p>
+  {% endif %}
+</div>
+{% endfor %}
+
+{% endblock %}

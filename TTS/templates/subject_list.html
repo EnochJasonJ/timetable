@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %}Subjects — TMS{% endblock %}
+{% block content %}
+{% load index %}
+
+<div class="page-header">
+  <div class="page-breadcrumb"><i class="bi bi-book-fill"></i> <span>Subjects</span></div>
+  <h2>Subject Catalog</h2>
+  <p>Manage subjects with codes, short names, and type classification.</p>
+</div>
+
+<!-- Filter -->
+<form method="get" class="filter-bar">
+  <label>Type:</label>
+  <select name="type" onchange="this.form.submit()">
+    <option value="">All Types</option>
+    <option value="THEORY" {% if filter_type == 'THEORY' %}selected{% endif %}>Theory</option>
+    <option value="LAB" {% if filter_type == 'LAB' %}selected{% endif %}>Laboratory</option>
+    <option value="ELECTIVE" {% if filter_type == 'ELECTIVE' %}selected{% endif %}>Elective</option>
+    <option value="COMMON" {% if filter_type == 'COMMON' %}selected{% endif %}>Common</option>
+  </select>
+</form>
+
+<div class="grid-2">
+  <div class="card">
+    <div class="card-header"><div class="card-title">Add Subject</div></div>
+    <form method="post">
+      {% csrf_token %}
+      <div class="django-form">{{ form.as_p }}</div>
+      <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-plus-circle-fill"></i> Add Subject</button>
+    </form>
+  </div>
+  <div class="card">
+    <div class="card-header"><div class="card-title">Legend</div></div>
+    <div style="display:flex; flex-direction:column; gap:10px; padding:8px 0;">
+      <div class="legend-item"><div class="legend-dot theory"></div> Theory — Regular classroom lectures</div>
+      <div class="legend-item"><div class="legend-dot lab"></div> Laboratory — Lab sessions (multi-slot)</div>
+      <div class="legend-item"><div class="legend-dot elective"></div> Elective — Optional elective courses</div>
+      <div class="legend-item"><div class="legend-dot common"></div> Common — Audit / common courses</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="padding:0; overflow:hidden; margin-top:20px;">
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Code</th><th>Subject Name</th><th>Short Name</th><th>Type</th>
+          <th>Credits</th><th>Weekly Hrs</th><th>Max Students</th><th class="td-actions">Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for subj in subjects %}
+        <tr>
+          <td><code style="font-weight:600; color:var(--primary);">{{ subj.code }}</code></td>
+          <td style="font-weight:600;">{{ subj.name }}</td>
+          <td><span class="badge badge-primary">{{ subj.short_name }}</span></td>
+          <td><span class="badge {{ subj.subject_type|subject_type_class }}">{{ subj.get_subject_type_display }}</span></td>
+          <td>{{ subj.credits }}</td>
+          <td>{{ subj.weekly_hours }}</td>
+          <td>{{ subj.max_students }}</td>
+          <td class="td-actions">
+            <form action="{% url 'subject_delete' subj.pk %}" method="post">{% csrf_token %}
+              <button type="submit" class="btn btn-icon btn-danger btn-sm" onclick="return confirm('Delete {{ subj.name }}?')"><i class="bi bi-trash3-fill"></i></button>
+            </form>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="8"><div class="empty-state"><i class="bi bi-book"></i><h3>No Subjects</h3><p>Add your first subject above.</p></div></td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

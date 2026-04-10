@@ -1,0 +1,297 @@
+{% extends 'base.html' %}
+{% load index %}
+{% block title %}Master Timetable — TMS{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <div class="page-breadcrumb">
+    <i class="bi bi-layout-wtf"></i>
+    <span>Master Timetable</span>
+  </div>
+  <h2>Master Timetable</h2>
+  <p>Consolidated planning view across sections, faculty, and rooms.</p>
+  <div class="page-header-actions">
+    <button onclick="window.print()" class="btn btn-secondary btn-sm">
+      <i class="bi bi-printer-fill"></i> Print
+    </button>
+  </div>
+</div>
+
+<!-- View Tabs -->
+<div class="tab-pills">
+  <a href="?view=section{% if filter_department %}&department={{ filter_department }}{% endif %}{% if filter_year %}&year={{ filter_year }}{% endif %}" class="tab-pill {% if view_type == 'section' %}active{% endif %}">
+    <i class="bi bi-collection-fill"></i> By Section
+  </a>
+  <a href="?view=faculty{% if filter_department %}&department={{ filter_department }}{% endif %}{% if filter_year %}&year={{ filter_year }}{% endif %}" class="tab-pill {% if view_type == 'faculty' %}active{% endif %}">
+    <i class="bi bi-person-badge-fill"></i> By Faculty
+  </a>
+  <a href="?view=room{% if filter_department %}&department={{ filter_department }}{% endif %}{% if filter_year %}&year={{ filter_year }}{% endif %}" class="tab-pill {% if view_type == 'room' %}active{% endif %}">
+    <i class="bi bi-building-fill"></i> By Room
+  </a>
+</div>
+
+<!-- Filter Bar -->
+<form method="get" class="filter-bar">
+  <input type="hidden" name="view" value="{{ view_type }}">
+  <label>Department:</label>
+  <select name="department" onchange="this.form.submit()">
+    <option value="">All Departments</option>
+    {% for dept in departments %}
+    <option value="{{ dept.id }}" {% if filter_department == dept.id|stringformat:"d" %}selected{% endif %}>{{ dept.code }} — {{ dept.name }}</option>
+    {% endfor %}
+  </select>
+  <label>Year:</label>
+  <select name="year" onchange="this.form.submit()">
+    <option value="">All Years</option>
+    {% for val, label in years %}
+    <option value="{{ val }}" {% if filter_year == val|stringformat:"d" %}selected{% endif %}>{{ label }}</option>
+    {% endfor %}
+  </select>
+  <label>Section:</label>
+  <select name="section" onchange="this.form.submit()">
+    <option value="">All Sections</option>
+    {% for sec in sections %}
+    <option value="{{ sec.id }}" {% if filter_section == sec.id|stringformat:"d" %}selected{% endif %}>{{ sec.label }}</option>
+    {% endfor %}
+  </select>
+  <label>Semester:</label>
+  <select name="semester" onchange="this.form.submit()">
+    <option value="">All</option>
+    {% for i in "12345678" %}<option value="{{ i }}" {% if filter_semester == i %}selected{% endif %}>Sem {{ i }}</option>{% endfor %}
+  </select>
+</form>
+
+<!-- Legend -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot theory"></div> Theory</div>
+  <div class="legend-item"><div class="legend-dot lab"></div> Laboratory</div>
+  <div class="legend-item"><div class="legend-dot elective"></div> Elective</div>
+  <div class="legend-item"><div class="legend-dot common"></div> Common / Activity</div>
+</div>
+
+{% if conflicts.total > 0 %}
+<div class="conflict-panel" style="margin-bottom: 20px;">
+  <h4><i class="bi bi-exclamation-triangle-fill"></i> {{ conflicts.total }} Conflict{{ conflicts.total|pluralize }} Detected</h4>
+  {% for c in conflicts.faculty %}
+  <div class="conflict-item">
+    <i class="bi bi-person-fill"></i>
+    <span><strong>Faculty:</strong> {{ c.faculty.display_name }} double-booked on {{ c.day }}, {{ c.slot.time_range }}</span>
+  </div>
+  {% endfor %}
+  {% for c in conflicts.room %}
+  <div class="conflict-item">
+    <i class="bi bi-building-fill"></i>
+    <span><strong>Room:</strong> {{ c.room }} double-booked on {{ c.day }}, {{ c.slot.time_range }}</span>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<!-- ═══ SECTION VIEW ═══ -->
+{% if view_type == 'section' %}
+  {% for sec_id, data in sections_data.items %}
+  <div class="timetable-section">
+    <div class="section-header">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <i class="bi bi-table" style="color: var(--primary); font-size: 1.1rem;"></i>
+        <span class="section-title">{{ data.section.label }}</span>
+        <span class="section-dept">{{ data.section.department.code }}</span>
+      </div>
+      {% for tt in data.section.timetables.all %}
+      <a href="{% url 'timetable_download' tt.pk %}?format=html" target="_blank" class="btn btn-sm btn-primary" title="Download PDF">
+        <i class="bi bi-download"></i> Download
+      </a>
+      {% endfor %}
+    </div>
+    <div class="card" style="padding: 0; overflow: hidden;">
+      <div class="table-wrap">
+        <table class="timetable-grid">
+          <thead>
+            <tr>
+              <th>Day</th>
+              {% for slot in slots %}
+                {% if slot.slot_type == 'BREAK' %}
+                <th class="break-col"><span class="break-label">Break</span><span class="slot-time">{{ slot.start_time|time:"h:i A" }}</span></th>
+                {% elif slot.slot_type == 'LUNCH' %}
+                <th class="lunch-col"><span class="break-label">Lunch</span><span class="slot-time">{{ slot.start_time|time:"h:i A" }}</span></th>
+                {% else %}
+                <th>P{{ slot.slot_number }}<span class="slot-time">{{ slot.start_time|time:"h:i A" }}</span></th>
+                {% endif %}
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for day in days %}
+            <tr>
+              <th>{{ day.1 }}</th>
+              {% for slot in slots %}
+                {% if slot.slot_type == 'BREAK' %}
+                <td class="break-cell"><div class="break-marker">☕</div></td>
+                {% elif slot.slot_type == 'LUNCH' %}
+                <td class="lunch-cell"><div class="break-marker">🍽️</div></td>
+                {% else %}
+                <td>
+                  {% timetable_cell data.grid day.0 slot.slot_number as cell %}
+                  {% if cell %}
+                  <div class="tt-cell {{ cell.subject_type|lower }}{% if cell.is_continuation %} continuation{% endif %}">
+                    <span class="tt-subject">{{ cell.subject_short }}</span>
+                    <span class="tt-faculty">{{ cell.faculty_name }}</span>
+                    <span class="tt-room">{{ cell.room }}</span>
+                  </div>
+                  {% else %}<span class="tt-empty">—</span>{% endif %}
+                </td>
+                {% endif %}
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <div class="card">
+    <div class="empty-state">
+      <i class="bi bi-calendar-x"></i>
+      <h3>No Timetables Found</h3>
+      <p>Generate a timetable first or adjust your filters.</p>
+    </div>
+  </div>
+  {% endfor %}
+{% endif %}
+
+<!-- ═══ FACULTY VIEW ═══ -->
+{% if view_type == 'faculty' %}
+  {% for fac_id, data in faculty_data.items %}
+  <div class="timetable-section">
+    <div class="section-header">
+      <i class="bi bi-person-badge-fill" style="color: var(--primary); font-size: 1.1rem;"></i>
+      <span class="section-title">{{ data.faculty.full_name }}</span>
+      <span class="section-dept">{{ data.faculty.faculty_id }}</span>
+      {% if data.faculty.department %}
+      <span class="badge badge-primary">{{ data.faculty.department.code }}</span>
+      {% endif %}
+    </div>
+    <div class="card" style="padding: 0; overflow: hidden;">
+      <div class="table-wrap">
+        <table class="timetable-grid">
+          <thead>
+            <tr>
+              <th>Day</th>
+              {% for slot in slots %}
+                {% if slot.slot_type == 'BREAK' %}
+                <th class="break-col"><span class="break-label">Break</span></th>
+                {% elif slot.slot_type == 'LUNCH' %}
+                <th class="lunch-col"><span class="break-label">Lunch</span></th>
+                {% else %}
+                <th>P{{ slot.slot_number }}<span class="slot-time">{{ slot.start_time|time:"h:i A" }}</span></th>
+                {% endif %}
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for day in days %}
+            <tr>
+              <th>{{ day.1 }}</th>
+              {% for slot in slots %}
+                {% if slot.slot_type == 'BREAK' %}
+                <td class="break-cell"><div class="break-marker">☕</div></td>
+                {% elif slot.slot_type == 'LUNCH' %}
+                <td class="lunch-cell"><div class="break-marker">🍽️</div></td>
+                {% else %}
+                <td>
+                  {% timetable_cell data.grid day.0 slot.slot_number as cell %}
+                  {% if cell %}
+                  <div class="tt-cell {{ cell.subject_type|lower }}">
+                    <span class="tt-subject">{{ cell.subject_short }}</span>
+                    {% if cell.section %}<span class="tt-section-label">{{ cell.section }}</span>{% endif %}
+                    <span class="tt-room">{{ cell.room }}</span>
+                  </div>
+                  {% else %}<span class="tt-empty">—</span>{% endif %}
+                </td>
+                {% endif %}
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <div class="card">
+    <div class="empty-state">
+      <i class="bi bi-person-x-fill"></i>
+      <h3>No Faculty Timetables</h3>
+      <p>No scheduled classes found for faculty members.</p>
+    </div>
+  </div>
+  {% endfor %}
+{% endif %}
+
+<!-- ═══ ROOM VIEW ═══ -->
+{% if view_type == 'room' %}
+  {% for rm_id, data in room_data.items %}
+  <div class="timetable-section">
+    <div class="section-header">
+      <i class="bi bi-building-fill" style="color: var(--primary); font-size: 1.1rem;"></i>
+      <span class="section-title">{{ data.room }}</span>
+    </div>
+    <div class="card" style="padding: 0; overflow: hidden;">
+      <div class="table-wrap">
+        <table class="timetable-grid">
+          <thead>
+            <tr>
+              <th>Day</th>
+              {% for slot in slots %}
+                {% if slot.slot_type == 'BREAK' %}
+                <th class="break-col"><span class="break-label">Break</span></th>
+                {% elif slot.slot_type == 'LUNCH' %}
+                <th class="lunch-col"><span class="break-label">Lunch</span></th>
+                {% else %}
+                <th>P{{ slot.slot_number }}<span class="slot-time">{{ slot.start_time|time:"h:i A" }}</span></th>
+                {% endif %}
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for day in days %}
+            <tr>
+              <th>{{ day.1 }}</th>
+              {% for slot in slots %}
+                {% if slot.slot_type == 'BREAK' %}
+                <td class="break-cell"><div class="break-marker">☕</div></td>
+                {% elif slot.slot_type == 'LUNCH' %}
+                <td class="lunch-cell"><div class="break-marker">🍽️</div></td>
+                {% else %}
+                <td>
+                  {% timetable_cell data.grid day.0 slot.slot_number as cell %}
+                  {% if cell %}
+                  <div class="tt-cell {{ cell.subject_type|lower }}">
+                    <span class="tt-subject">{{ cell.subject_short }}</span>
+                    {% if cell.section %}<span class="tt-section-label">{{ cell.section }}</span>{% endif %}
+                    <span class="tt-faculty">{{ cell.faculty_name }}</span>
+                  </div>
+                  {% else %}<span class="tt-empty">—</span>{% endif %}
+                </td>
+                {% endif %}
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <div class="card">
+    <div class="empty-state">
+      <i class="bi bi-building-x"></i>
+      <h3>No Room Schedules</h3>
+      <p>No rooms have been assigned in any timetable yet.</p>
+    </div>
+  </div>
+  {% endfor %}
+{% endif %}
+
+{% endblock %}

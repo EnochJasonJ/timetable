@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}Rooms — TMS{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <div class="page-breadcrumb"><i class="bi bi-building-fill"></i> <span>Rooms</span></div>
+  <h2>Rooms & Venues</h2>
+  <p>Manage classrooms, labs, and other venues.</p>
+</div>
+
+<div class="grid-2">
+  <div class="card">
+    <div class="card-header"><div class="card-title">Add Room</div></div>
+    <form method="post">
+      {% csrf_token %}
+      <div class="django-form">{{ form.as_p }}</div>
+      <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-plus-circle-fill"></i> Add Room</button>
+    </form>
+  </div>
+  <div class="card">
+    <div class="card-header"><div class="card-title">Summary</div></div>
+    <div class="stat-card" style="box-shadow:none; border:none; padding:14px;">
+      <div class="stat-value">{{ rooms|length }}</div>
+      <div class="stat-label">Total Rooms</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="padding:0; overflow:hidden; margin-top:20px;">
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Room Number</th><th>Name</th><th>Building</th><th>Capacity</th><th>Type</th><th class="td-actions">Remove</th></tr></thead>
+      <tbody>
+        {% for room in rooms %}
+        <tr>
+          <td style="font-weight:600;">{{ room.number }}</td>
+          <td>{{ room.name|default:"—" }}</td>
+          <td>{{ room.building|default:"—" }}</td>
+          <td>{{ room.seating_capacity }}</td>
+          <td><span class="badge {% if room.room_type == 'LAB' %}badge-lab{% elif room.room_type == 'SEMINAR' %}badge-elective{% else %}badge-theory{% endif %}">{{ room.get_room_type_display }}</span></td>
+          <td class="td-actions">
+            <form action="{% url 'room_delete' room.pk %}" method="post">{% csrf_token %}
+              <button type="submit" class="btn btn-icon btn-danger btn-sm" onclick="return confirm('Delete room {{ room.number }}?')"><i class="bi bi-trash3-fill"></i></button>
+            </form>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6"><div class="empty-state"><i class="bi bi-building"></i><h3>No Rooms</h3><p>Add rooms to enable scheduling.</p></div></td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
