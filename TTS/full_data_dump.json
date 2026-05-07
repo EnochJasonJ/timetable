@@ -1,0 +1,5224 @@
+[
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$LmsX8H4Ti1fim3PgWZvOJX$8ms1THwl39/pTw0YzX0IbVhgmbTEx/HUk3fLPvJdTcg=",
+    "last_login": "2026-04-11T04:08:10.079Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "System",
+    "last_name": "Admin",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-04-06T03:20:10.944Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$7E72eHRXVluFgKv1rPzxsE$JCHjnq1CtM6teUCLBCmNHuFC17mYVOQy/ENgj09d9Yc=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "hod_cse",
+    "first_name": "M",
+    "last_name": "Karthikeyan",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-04-06T03:20:11.037Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$rd0sHDBc4atsT36GWFka8Y$fF99h00ObQU1y7k8vVdbZfoRBqYxmhpjx3+3rK/LUik=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "faculty1",
+    "first_name": "S",
+    "last_name": "Priya",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-06T03:20:11.123Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$CcH27lceoDb2K5tlI42Uaj$V+GBganWNtD57LFnOJoQ3B5o7w0AUxGGAgfHiA80In8=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "student1",
+    "first_name": "Rahul",
+    "last_name": "Kumar",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-06T03:20:11.211Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "451hhn580tuxmucupr7w8zm1547amext",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hCgJQMu3XsGMsMMUjU0Ke3KeHdt0oVu_3vvv1TCba1p67KkidVZWXX63QjzQ9oO-I7tNus8t3WZSO-KPmjX15nleTncv4OKvX7rIEKOvBlHQZu9HSJmE4EcmuiL4BCBDRAwFOBsiB2Ksy4UlCAGWL0_98U4tg:1wAhcJ:mrGATBec2ma6ZKWZhjnI2Ryr4-yXcnl0WLa8sIUw_-4",
+    "expire_date": "2026-04-23T05:07:47.782Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "e9p90zuimxs655riaexluor2v5l8ftdm",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hCgJQMu3XsGMsMMUjU0Ke3KeHdt0oVu_3vvv1TCba1p67KkidVZWXX63QjzQ9oO-I7tNus8t3WZSO-KPmjX15nleTncv4OKvX7rIEKOvBlHQZu9HSJmE4EcmuiL4BCBDRAwFOBsiB2Ksy4UlCAGWL0_98U4tg:1wBPdi:u6MLzu_i8KouotTZzlcJR9CZcLKS14dNwhkuEIwB7qU",
+    "expire_date": "2026-04-25T04:08:10.083Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "f30tkdlvel2ugouqb1k4kytyn66ni9m3",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hCgJQMu3XsGMsMMUjU0Ke3KeHdt0oVu_3vvv1TCba1p67KkidVZWXX63QjzQ9oO-I7tNus8t3WZSO-KPmjX15nleTncv4OKvX7rIEKOvBlHQZu9HSJmE4EcmuiL4BCBDRAwFOBsiB2Ksy4UlCAGWL0_98U4tg:1wAQ7f:gavNodGsIOh1zETxu2FCNbMkVdSP3sZFifg2nmg50mg",
+    "expire_date": "2026-04-22T10:26:59.552Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "nslu6dzkvkirqag2ot3zajytylxzkcwi",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hCgJQMu3XsGMsMMUjU0Ke3KeHdt0oVu_3vvv1TCba1p67KkidVZWXX63QjzQ9oO-I7tNus8t3WZSO-KPmjX15nleTncv4OKvX7rIEKOvBlHQZu9HSJmE4EcmuiL4BCBDRAwFOBsiB2Ksy4UlCAGWL0_98U4tg:1w9eI4:BfHixt8jdOHM5Li-nMMHwc_kr-9CAlN7gprR4jAId5Q",
+    "expire_date": "2026-04-20T07:22:32.619Z"
+  }
+},
+{
+  "model": "SchedulerApp.department",
+  "pk": 26,
+  "fields": {
+    "name": "Computer Science & Engineering",
+    "code": "CSE"
+  }
+},
+{
+  "model": "SchedulerApp.department",
+  "pk": 27,
+  "fields": {
+    "name": "Electronics & Communication Engineering",
+    "code": "ECE"
+  }
+},
+{
+  "model": "SchedulerApp.department",
+  "pk": 28,
+  "fields": {
+    "name": "Electrical & Electronics Engineering",
+    "code": "EEE"
+  }
+},
+{
+  "model": "SchedulerApp.department",
+  "pk": 29,
+  "fields": {
+    "name": "Mechanical Engineering",
+    "code": "ME"
+  }
+},
+{
+  "model": "SchedulerApp.department",
+  "pk": 31,
+  "fields": {
+    "name": "Artificial Intelligence and Machine Learning",
+    "code": "AIML"
+  }
+},
+{
+  "model": "SchedulerApp.department",
+  "pk": 32,
+  "fields": {
+    "name": "Science and Humanities",
+    "code": "S&H"
+  }
+},
+{
+  "model": "SchedulerApp.department",
+  "pk": 33,
+  "fields": {
+    "name": "Placement Training",
+    "code": "PT"
+  }
+},
+{
+  "model": "SchedulerApp.program",
+  "pk": 22,
+  "fields": {
+    "department": 26,
+    "name": "Computer Science & Engineering",
+    "code": "CSE",
+    "duration_years": 4
+  }
+},
+{
+  "model": "SchedulerApp.program",
+  "pk": 24,
+  "fields": {
+    "department": 27,
+    "name": "Electronics & Communication Engineering",
+    "code": "ECE",
+    "duration_years": 4
+  }
+},
+{
+  "model": "SchedulerApp.program",
+  "pk": 25,
+  "fields": {
+    "department": 29,
+    "name": "Mechanical Engineering",
+    "code": "MECH",
+    "duration_years": 4
+  }
+},
+{
+  "model": "SchedulerApp.program",
+  "pk": 26,
+  "fields": {
+    "department": 31,
+    "name": "Artificial Intelliegence and Machine Learning",
+    "code": "AIML",
+    "duration_years": 4
+  }
+},
+{
+  "model": "SchedulerApp.program",
+  "pk": 27,
+  "fields": {
+    "department": 28,
+    "name": "Electronics And Electrical Engineering",
+    "code": "EEE",
+    "duration_years": 4
+  }
+},
+{
+  "model": "SchedulerApp.academicyear",
+  "pk": 11,
+  "fields": {
+    "label": "2025-2026",
+    "start_date": "2025-06-15",
+    "end_date": "2026-05-31",
+    "is_current": true
+  }
+},
+{
+  "model": "SchedulerApp.academicyear",
+  "pk": 12,
+  "fields": {
+    "label": "2024-2025",
+    "start_date": "2024-06-15",
+    "end_date": "2025-05-31",
+    "is_current": false
+  }
+},
+{
+  "model": "SchedulerApp.room",
+  "pk": 51,
+  "fields": {
+    "number": "A101",
+    "name": "Lecture Hall 1",
+    "building": "Block A",
+    "seating_capacity": 60,
+    "room_type": "CLASSROOM"
+  }
+},
+{
+  "model": "SchedulerApp.room",
+  "pk": 52,
+  "fields": {
+    "number": "A102",
+    "name": "Lecture Hall 2",
+    "building": "Block A",
+    "seating_capacity": 60,
+    "room_type": "CLASSROOM"
+  }
+},
+{
+  "model": "SchedulerApp.room",
+  "pk": 53,
+  "fields": {
+    "number": "A103",
+    "name": "Lecture Hall 3",
+    "building": "Block A",
+    "seating_capacity": 60,
+    "room_type": "CLASSROOM"
+  }
+},
+{
+  "model": "SchedulerApp.room",
+  "pk": 54,
+  "fields": {
+    "number": "A104",
+    "name": "Lecture Hall 6",
+    "building": "Block A",
+    "seating_capacity": 60,
+    "room_type": "CLASSROOM"
+  }
+},
+{
+  "model": "SchedulerApp.room",
+  "pk": 55,
+  "fields": {
+    "number": "A201",
+    "name": "Lecture Hall 4",
+    "building": "Block A",
+    "seating_capacity": 80,
+    "room_type": "CLASSROOM"
+  }
+},
+{
+  "model": "SchedulerApp.room",
+  "pk": 56,
+  "fields": {
+    "number": "A202",
+    "name": "Lecture Hall 5",
+    "building": "Block A",
+    "seating_capacity": 80,
+    "room_type": "CLASSROOM"
+  }
+},
+{
+  "model": "SchedulerApp.room",
+  "pk": 57,
+  "fields": {
+    "number": "B101",
+    "name": "Seminar Hall 1",
+    "building": "Block B",
+    "seating_capacity": 120,
+    "room_type": "SEMINAR"
+  }
+},
+{
+  "model": "SchedulerApp.room",
+  "pk": 58,
+  "fields": {
+    "number": "LAB-1",
+    "name": "CS Lab 1",
+    "building": "Block C",
+    "seating_capacity": 40,
+    "room_type": "LAB"
+  }
+},
+{
+  "model": "SchedulerApp.room",
+  "pk": 59,
+  "fields": {
+    "number": "LAB-2",
+    "name": "CS Lab 2",
+    "building": "Block C",
+    "seating_capacity": 40,
+    "room_type": "LAB"
+  }
+},
+{
+  "model": "SchedulerApp.room",
+  "pk": 60,
+  "fields": {
+    "number": "LAB-3",
+    "name": "ML Lab",
+    "building": "Block C",
+    "seating_capacity": 40,
+    "room_type": "LAB"
+  }
+},
+{
+  "model": "SchedulerApp.room",
+  "pk": 61,
+  "fields": {
+    "number": "LAB-4",
+    "name": "DS Lab",
+    "building": "Block C",
+    "seating_capacity": 40,
+    "room_type": "LAB"
+  }
+},
+{
+  "model": "SchedulerApp.room",
+  "pk": 62,
+  "fields": {
+    "number": "GF015",
+    "name": "Library",
+    "building": "Main Block",
+    "seating_capacity": 100,
+    "room_type": "CLASSROOM"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 253,
+  "fields": {
+    "slot_number": 1,
+    "day": "MON",
+    "start_time": "08:40:00",
+    "end_time": "09:35:00",
+    "slot_type": "REGULAR",
+    "label": "Period 1"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 254,
+  "fields": {
+    "slot_number": 2,
+    "day": "MON",
+    "start_time": "09:35:00",
+    "end_time": "10:25:00",
+    "slot_type": "REGULAR",
+    "label": "Period 2"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 255,
+  "fields": {
+    "slot_number": 3,
+    "day": "MON",
+    "start_time": "10:25:00",
+    "end_time": "11:15:00",
+    "slot_type": "REGULAR",
+    "label": "Period 3"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 256,
+  "fields": {
+    "slot_number": 4,
+    "day": "MON",
+    "start_time": "11:15:00",
+    "end_time": "11:35:00",
+    "slot_type": "BREAK",
+    "label": "Tea Break"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 257,
+  "fields": {
+    "slot_number": 5,
+    "day": "MON",
+    "start_time": "11:35:00",
+    "end_time": "12:25:00",
+    "slot_type": "REGULAR",
+    "label": "Period 4"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 258,
+  "fields": {
+    "slot_number": 6,
+    "day": "MON",
+    "start_time": "12:25:00",
+    "end_time": "13:15:00",
+    "slot_type": "REGULAR",
+    "label": "Period 5"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 259,
+  "fields": {
+    "slot_number": 7,
+    "day": "MON",
+    "start_time": "13:15:00",
+    "end_time": "14:00:00",
+    "slot_type": "LUNCH",
+    "label": "Lunch Break"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 260,
+  "fields": {
+    "slot_number": 8,
+    "day": "MON",
+    "start_time": "14:00:00",
+    "end_time": "14:45:00",
+    "slot_type": "REGULAR",
+    "label": "Period 6"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 261,
+  "fields": {
+    "slot_number": 9,
+    "day": "MON",
+    "start_time": "14:00:00",
+    "end_time": "14:30:00",
+    "slot_type": "BREAK",
+    "label": "Activity Hour"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 262,
+  "fields": {
+    "slot_number": 1,
+    "day": "TUE",
+    "start_time": "08:40:00",
+    "end_time": "09:35:00",
+    "slot_type": "REGULAR",
+    "label": "Period 1"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 263,
+  "fields": {
+    "slot_number": 2,
+    "day": "TUE",
+    "start_time": "09:35:00",
+    "end_time": "10:25:00",
+    "slot_type": "REGULAR",
+    "label": "Period 2"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 264,
+  "fields": {
+    "slot_number": 3,
+    "day": "TUE",
+    "start_time": "10:25:00",
+    "end_time": "11:15:00",
+    "slot_type": "REGULAR",
+    "label": "Period 3"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 265,
+  "fields": {
+    "slot_number": 4,
+    "day": "TUE",
+    "start_time": "11:15:00",
+    "end_time": "11:35:00",
+    "slot_type": "BREAK",
+    "label": "Tea Break"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 266,
+  "fields": {
+    "slot_number": 5,
+    "day": "TUE",
+    "start_time": "11:35:00",
+    "end_time": "12:25:00",
+    "slot_type": "REGULAR",
+    "label": "Period 4"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 267,
+  "fields": {
+    "slot_number": 6,
+    "day": "TUE",
+    "start_time": "12:25:00",
+    "end_time": "13:15:00",
+    "slot_type": "REGULAR",
+    "label": "Period 5"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 268,
+  "fields": {
+    "slot_number": 7,
+    "day": "TUE",
+    "start_time": "13:15:00",
+    "end_time": "14:00:00",
+    "slot_type": "LUNCH",
+    "label": "Lunch Break"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 269,
+  "fields": {
+    "slot_number": 8,
+    "day": "TUE",
+    "start_time": "14:00:00",
+    "end_time": "14:45:00",
+    "slot_type": "REGULAR",
+    "label": "Period 6"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 270,
+  "fields": {
+    "slot_number": 9,
+    "day": "TUE",
+    "start_time": "14:00:00",
+    "end_time": "14:30:00",
+    "slot_type": "BREAK",
+    "label": "Activity Hour"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 271,
+  "fields": {
+    "slot_number": 1,
+    "day": "WED",
+    "start_time": "08:40:00",
+    "end_time": "09:35:00",
+    "slot_type": "REGULAR",
+    "label": "Period 1"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 272,
+  "fields": {
+    "slot_number": 2,
+    "day": "WED",
+    "start_time": "09:35:00",
+    "end_time": "10:25:00",
+    "slot_type": "REGULAR",
+    "label": "Period 2"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 273,
+  "fields": {
+    "slot_number": 3,
+    "day": "WED",
+    "start_time": "10:25:00",
+    "end_time": "11:15:00",
+    "slot_type": "REGULAR",
+    "label": "Period 3"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 274,
+  "fields": {
+    "slot_number": 4,
+    "day": "WED",
+    "start_time": "11:15:00",
+    "end_time": "11:35:00",
+    "slot_type": "BREAK",
+    "label": "Tea Break"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 275,
+  "fields": {
+    "slot_number": 5,
+    "day": "WED",
+    "start_time": "11:35:00",
+    "end_time": "12:25:00",
+    "slot_type": "REGULAR",
+    "label": "Period 4"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 276,
+  "fields": {
+    "slot_number": 6,
+    "day": "WED",
+    "start_time": "12:25:00",
+    "end_time": "13:15:00",
+    "slot_type": "REGULAR",
+    "label": "Period 5"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 277,
+  "fields": {
+    "slot_number": 7,
+    "day": "WED",
+    "start_time": "13:15:00",
+    "end_time": "14:00:00",
+    "slot_type": "LUNCH",
+    "label": "Lunch Break"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 278,
+  "fields": {
+    "slot_number": 8,
+    "day": "WED",
+    "start_time": "14:00:00",
+    "end_time": "14:45:00",
+    "slot_type": "REGULAR",
+    "label": "Period 6"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 279,
+  "fields": {
+    "slot_number": 9,
+    "day": "WED",
+    "start_time": "14:00:00",
+    "end_time": "14:30:00",
+    "slot_type": "BREAK",
+    "label": "Activity Hour"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 280,
+  "fields": {
+    "slot_number": 1,
+    "day": "THU",
+    "start_time": "08:40:00",
+    "end_time": "09:35:00",
+    "slot_type": "REGULAR",
+    "label": "Period 1"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 281,
+  "fields": {
+    "slot_number": 2,
+    "day": "THU",
+    "start_time": "09:35:00",
+    "end_time": "10:25:00",
+    "slot_type": "REGULAR",
+    "label": "Period 2"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 282,
+  "fields": {
+    "slot_number": 3,
+    "day": "THU",
+    "start_time": "10:25:00",
+    "end_time": "11:15:00",
+    "slot_type": "REGULAR",
+    "label": "Period 3"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 283,
+  "fields": {
+    "slot_number": 4,
+    "day": "THU",
+    "start_time": "11:15:00",
+    "end_time": "11:35:00",
+    "slot_type": "BREAK",
+    "label": "Tea Break"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 284,
+  "fields": {
+    "slot_number": 5,
+    "day": "THU",
+    "start_time": "11:35:00",
+    "end_time": "12:25:00",
+    "slot_type": "REGULAR",
+    "label": "Period 4"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 285,
+  "fields": {
+    "slot_number": 6,
+    "day": "THU",
+    "start_time": "12:25:00",
+    "end_time": "13:15:00",
+    "slot_type": "REGULAR",
+    "label": "Period 5"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 286,
+  "fields": {
+    "slot_number": 7,
+    "day": "THU",
+    "start_time": "13:15:00",
+    "end_time": "14:00:00",
+    "slot_type": "LUNCH",
+    "label": "Lunch Break"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 287,
+  "fields": {
+    "slot_number": 8,
+    "day": "THU",
+    "start_time": "14:00:00",
+    "end_time": "14:45:00",
+    "slot_type": "REGULAR",
+    "label": "Period 6"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 288,
+  "fields": {
+    "slot_number": 9,
+    "day": "THU",
+    "start_time": "14:00:00",
+    "end_time": "14:30:00",
+    "slot_type": "BREAK",
+    "label": "Activity Hour"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 289,
+  "fields": {
+    "slot_number": 1,
+    "day": "FRI",
+    "start_time": "08:40:00",
+    "end_time": "09:35:00",
+    "slot_type": "REGULAR",
+    "label": "Period 1"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 290,
+  "fields": {
+    "slot_number": 2,
+    "day": "FRI",
+    "start_time": "09:35:00",
+    "end_time": "10:25:00",
+    "slot_type": "REGULAR",
+    "label": "Period 2"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 291,
+  "fields": {
+    "slot_number": 3,
+    "day": "FRI",
+    "start_time": "10:25:00",
+    "end_time": "11:15:00",
+    "slot_type": "REGULAR",
+    "label": "Period 3"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 292,
+  "fields": {
+    "slot_number": 4,
+    "day": "FRI",
+    "start_time": "11:15:00",
+    "end_time": "11:35:00",
+    "slot_type": "BREAK",
+    "label": "Tea Break"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 293,
+  "fields": {
+    "slot_number": 5,
+    "day": "FRI",
+    "start_time": "11:35:00",
+    "end_time": "12:25:00",
+    "slot_type": "REGULAR",
+    "label": "Period 4"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 294,
+  "fields": {
+    "slot_number": 6,
+    "day": "FRI",
+    "start_time": "12:25:00",
+    "end_time": "13:15:00",
+    "slot_type": "REGULAR",
+    "label": "Period 5"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 295,
+  "fields": {
+    "slot_number": 7,
+    "day": "FRI",
+    "start_time": "13:15:00",
+    "end_time": "14:00:00",
+    "slot_type": "LUNCH",
+    "label": "Lunch Break"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 296,
+  "fields": {
+    "slot_number": 8,
+    "day": "FRI",
+    "start_time": "14:00:00",
+    "end_time": "14:45:00",
+    "slot_type": "REGULAR",
+    "label": "Period 6"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 297,
+  "fields": {
+    "slot_number": 9,
+    "day": "FRI",
+    "start_time": "14:00:00",
+    "end_time": "14:30:00",
+    "slot_type": "BREAK",
+    "label": "Activity Hour"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 298,
+  "fields": {
+    "slot_number": 1,
+    "day": "SAT",
+    "start_time": "08:40:00",
+    "end_time": "09:35:00",
+    "slot_type": "REGULAR",
+    "label": "Period 1"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 299,
+  "fields": {
+    "slot_number": 2,
+    "day": "SAT",
+    "start_time": "09:35:00",
+    "end_time": "10:25:00",
+    "slot_type": "REGULAR",
+    "label": "Period 2"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 300,
+  "fields": {
+    "slot_number": 3,
+    "day": "SAT",
+    "start_time": "10:25:00",
+    "end_time": "11:15:00",
+    "slot_type": "REGULAR",
+    "label": "Period 3"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 301,
+  "fields": {
+    "slot_number": 4,
+    "day": "SAT",
+    "start_time": "11:15:00",
+    "end_time": "11:35:00",
+    "slot_type": "BREAK",
+    "label": "Tea Break"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 302,
+  "fields": {
+    "slot_number": 5,
+    "day": "SAT",
+    "start_time": "11:35:00",
+    "end_time": "12:25:00",
+    "slot_type": "REGULAR",
+    "label": "Period 4"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 303,
+  "fields": {
+    "slot_number": 6,
+    "day": "SAT",
+    "start_time": "12:25:00",
+    "end_time": "13:15:00",
+    "slot_type": "REGULAR",
+    "label": "Period 5"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 304,
+  "fields": {
+    "slot_number": 7,
+    "day": "SAT",
+    "start_time": "13:15:00",
+    "end_time": "14:00:00",
+    "slot_type": "LUNCH",
+    "label": "Lunch Break"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 305,
+  "fields": {
+    "slot_number": 8,
+    "day": "SAT",
+    "start_time": "14:00:00",
+    "end_time": "14:45:00",
+    "slot_type": "REGULAR",
+    "label": "Period 6"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 306,
+  "fields": {
+    "slot_number": 9,
+    "day": "SAT",
+    "start_time": "14:00:00",
+    "end_time": "14:30:00",
+    "slot_type": "BREAK",
+    "label": "Activity Hour"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 307,
+  "fields": {
+    "slot_number": 55,
+    "day": "MON",
+    "start_time": "14:30:00",
+    "end_time": "15:20:00",
+    "slot_type": "REGULAR",
+    "label": "Period 6"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 308,
+  "fields": {
+    "slot_number": 56,
+    "day": "MON",
+    "start_time": "15:20:00",
+    "end_time": "16:10:00",
+    "slot_type": "REGULAR",
+    "label": "Period 7"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 309,
+  "fields": {
+    "slot_number": 55,
+    "day": "TUE",
+    "start_time": "14:30:00",
+    "end_time": "15:20:00",
+    "slot_type": "REGULAR",
+    "label": "Period 6"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 310,
+  "fields": {
+    "slot_number": 56,
+    "day": "TUE",
+    "start_time": "15:20:00",
+    "end_time": "16:10:00",
+    "slot_type": "REGULAR",
+    "label": "Period 7"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 311,
+  "fields": {
+    "slot_number": 55,
+    "day": "WED",
+    "start_time": "14:30:00",
+    "end_time": "15:20:00",
+    "slot_type": "REGULAR",
+    "label": "Period 6"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 312,
+  "fields": {
+    "slot_number": 56,
+    "day": "WED",
+    "start_time": "15:20:00",
+    "end_time": "16:10:00",
+    "slot_type": "REGULAR",
+    "label": "Period 7"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 313,
+  "fields": {
+    "slot_number": 55,
+    "day": "THU",
+    "start_time": "14:30:00",
+    "end_time": "15:20:00",
+    "slot_type": "REGULAR",
+    "label": "Period 6"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 314,
+  "fields": {
+    "slot_number": 56,
+    "day": "THU",
+    "start_time": "15:20:00",
+    "end_time": "16:10:00",
+    "slot_type": "REGULAR",
+    "label": "Period 7"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 315,
+  "fields": {
+    "slot_number": 55,
+    "day": "FRI",
+    "start_time": "14:30:00",
+    "end_time": "15:20:00",
+    "slot_type": "REGULAR",
+    "label": "Period 6"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 316,
+  "fields": {
+    "slot_number": 56,
+    "day": "FRI",
+    "start_time": "15:20:00",
+    "end_time": "16:10:00",
+    "slot_type": "REGULAR",
+    "label": "Period 7"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 317,
+  "fields": {
+    "slot_number": 55,
+    "day": "SAT",
+    "start_time": "14:30:00",
+    "end_time": "15:20:00",
+    "slot_type": "REGULAR",
+    "label": "Period 6"
+  }
+},
+{
+  "model": "SchedulerApp.timeslot",
+  "pk": 318,
+  "fields": {
+    "slot_number": 56,
+    "day": "SAT",
+    "start_time": "15:20:00",
+    "end_time": "16:10:00",
+    "slot_type": "REGULAR",
+    "label": "Period 7"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 71,
+  "fields": {
+    "faculty_id": "CSE001",
+    "first_name": "M",
+    "last_name": "Karthikeyan",
+    "initials": "Dr. MK",
+    "email": "cse001@college.edu",
+    "department": 26,
+    "designation": "PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 72,
+  "fields": {
+    "faculty_id": "CSE002",
+    "first_name": "R",
+    "last_name": "Abirami",
+    "initials": "RA",
+    "email": "cse002@college.edu",
+    "department": 26,
+    "designation": "ASSOC_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 73,
+  "fields": {
+    "faculty_id": "CSE003",
+    "first_name": "S",
+    "last_name": "Priya",
+    "initials": "SP",
+    "email": "cse003@college.edu",
+    "department": 26,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 74,
+  "fields": {
+    "faculty_id": "CSE004",
+    "first_name": "K",
+    "last_name": "Venkatesh",
+    "initials": "KV",
+    "email": "cse004@college.edu",
+    "department": 26,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 75,
+  "fields": {
+    "faculty_id": "CSE005",
+    "first_name": "A",
+    "last_name": "Lakshmi",
+    "initials": "AL",
+    "email": "cse005@college.edu",
+    "department": 26,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 76,
+  "fields": {
+    "faculty_id": "CSE006",
+    "first_name": "P",
+    "last_name": "Ramesh",
+    "initials": "PR",
+    "email": "cse006@college.edu",
+    "department": 26,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 77,
+  "fields": {
+    "faculty_id": "CSE007",
+    "first_name": "N",
+    "last_name": "Deepa",
+    "initials": "ND",
+    "email": "cse007@college.edu",
+    "department": 26,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 78,
+  "fields": {
+    "faculty_id": "CSE008",
+    "first_name": "B",
+    "last_name": "Santhosh",
+    "initials": "BS",
+    "email": "cse008@college.edu",
+    "department": 26,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 79,
+  "fields": {
+    "faculty_id": "CSE009",
+    "first_name": "R",
+    "last_name": "Kumar",
+    "initials": "RK",
+    "email": "cse009@college.edu",
+    "department": 26,
+    "designation": "ASSOC_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 80,
+  "fields": {
+    "faculty_id": "CSE010",
+    "first_name": "G",
+    "last_name": "Sundari",
+    "initials": "GS",
+    "email": "cse010@college.edu",
+    "department": 26,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 81,
+  "fields": {
+    "faculty_id": "CSE011",
+    "first_name": "D",
+    "last_name": "Mohan",
+    "initials": "DM",
+    "email": "cse011@college.edu",
+    "department": 26,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 82,
+  "fields": {
+    "faculty_id": "CSE012",
+    "first_name": "V",
+    "last_name": "Saranya",
+    "initials": "VS",
+    "email": "cse012@college.edu",
+    "department": 26,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 83,
+  "fields": {
+    "faculty_id": "ECE001",
+    "first_name": "T",
+    "last_name": "Rajesh",
+    "initials": "TR",
+    "email": "ece001@college.edu",
+    "department": 27,
+    "designation": "ASSOC_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 84,
+  "fields": {
+    "faculty_id": "ECE002",
+    "first_name": "L",
+    "last_name": "Meena",
+    "initials": "LM",
+    "email": "ece002@college.edu",
+    "department": 27,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 85,
+  "fields": {
+    "faculty_id": "AIML001",
+    "first_name": "Dr.S.Sumathi",
+    "last_name": "",
+    "initials": "Dr. SS",
+    "email": "hodaiml@sece.ac.in",
+    "department": 31,
+    "designation": "HOD"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 86,
+  "fields": {
+    "faculty_id": "AIML002",
+    "first_name": "Dr.V.Karunakaran",
+    "last_name": "",
+    "initials": "Dr. VK",
+    "email": "dr.vkaiml@sece.ac.in",
+    "department": 31,
+    "designation": "ASSOC_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 87,
+  "fields": {
+    "faculty_id": "AIML003",
+    "first_name": "Dr.Brindha",
+    "last_name": "Senthil Kumar",
+    "initials": "Dr. BSK",
+    "email": "dr.bskaiml@sece.ac.in",
+    "department": 31,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 88,
+  "fields": {
+    "faculty_id": "AIML004",
+    "first_name": "Dr.N.Varatharajan",
+    "last_name": "",
+    "initials": "Dr. NV",
+    "email": "dr.nvaiml@sece.ac.in",
+    "department": 31,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 89,
+  "fields": {
+    "faculty_id": "AIML005",
+    "first_name": "Dr.K.Kathiresan",
+    "last_name": "",
+    "initials": "Dr. KK",
+    "email": "dr.kkaiml@sece.ac.in",
+    "department": 31,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 90,
+  "fields": {
+    "faculty_id": "AIML006",
+    "first_name": "Ms.P.Preethi",
+    "last_name": "",
+    "initials": "Ms. PP",
+    "email": "msppaiml@sece.ac.in",
+    "department": 31,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 91,
+  "fields": {
+    "faculty_id": "AIML007",
+    "first_name": "Ms.S.Sindhuja",
+    "last_name": "",
+    "initials": "Ms. SS",
+    "email": "ms.ssaiml@sece.ac.in",
+    "department": 31,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 92,
+  "fields": {
+    "faculty_id": "AIML008",
+    "first_name": "Ms.T.Kalaivani",
+    "last_name": "",
+    "initials": "Ms. TK",
+    "email": "ms.tkaiml@sece.ac.in",
+    "department": 31,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 93,
+  "fields": {
+    "faculty_id": "AIML009",
+    "first_name": "Ms.P.Charanya",
+    "last_name": "",
+    "initials": "Ms. PC",
+    "email": "ms.pcaiml@sece.ac.in",
+    "department": 31,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 94,
+  "fields": {
+    "faculty_id": "AIML010",
+    "first_name": "Ms.G.Sharmila",
+    "last_name": "",
+    "initials": "Ms. GS",
+    "email": "ms.gsaiml@sece.ac.in",
+    "department": 31,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 95,
+  "fields": {
+    "faculty_id": "AIML011",
+    "first_name": "Ms.G.Sandhya",
+    "last_name": "",
+    "initials": "Ms. GS",
+    "email": "ms.gsaiml@sece.ac.in",
+    "department": 31,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 96,
+  "fields": {
+    "faculty_id": "AIML012",
+    "first_name": "Ms.A.Suganya",
+    "last_name": "",
+    "initials": "Ms. AS",
+    "email": "ms.asaiml@sece.ac.in",
+    "department": 31,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 97,
+  "fields": {
+    "faculty_id": "AIML013",
+    "first_name": "Mr.R.Vikkram",
+    "last_name": "",
+    "initials": "Mr. RV",
+    "email": "mr.rvaiml@sece.ac.in",
+    "department": 31,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 98,
+  "fields": {
+    "faculty_id": "AIML014",
+    "first_name": "Ms.A.Praveena",
+    "last_name": "",
+    "initials": "Ms. AP",
+    "email": "ms.apaiml@sece.ac.in",
+    "department": 31,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 99,
+  "fields": {
+    "faculty_id": "AIML015",
+    "first_name": "Mr.M.Gowrisanker",
+    "last_name": "",
+    "initials": "Mr. MG",
+    "email": "mr.msaiml@sece.ac.in",
+    "department": 31,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 100,
+  "fields": {
+    "faculty_id": "AIML016",
+    "first_name": "Mr.G.Aravindraj",
+    "last_name": "",
+    "initials": "Mr. GA",
+    "email": "mr.gaaiml@sece.ac.in",
+    "department": 31,
+    "designation": "VISITING"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 101,
+  "fields": {
+    "faculty_id": "SH001",
+    "first_name": "Dr.M.Tamilarasi",
+    "last_name": "",
+    "initials": "DR. MT",
+    "email": "dr.mtaiml@sece.ac.in",
+    "department": 32,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 102,
+  "fields": {
+    "faculty_id": "SH002",
+    "first_name": "Dr.R.Malathy",
+    "last_name": "",
+    "initials": "Dr. RM",
+    "email": "dr.rmaiml@sece.ac.in",
+    "department": 31,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 103,
+  "fields": {
+    "faculty_id": "PT001",
+    "first_name": "Ms. Sofia Jeniffer",
+    "last_name": "",
+    "initials": "Ms. SJ",
+    "email": "ms.sjaiml@sece.ac.in",
+    "department": 33,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 104,
+  "fields": {
+    "faculty_id": "PT002",
+    "first_name": "Mr. Sakthi",
+    "last_name": "Kumar",
+    "initials": "Mr. SK",
+    "email": "mr.skaiml@sece.ac.in",
+    "department": 27,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 105,
+  "fields": {
+    "faculty_id": "LB001",
+    "first_name": "Mr. K. Madhavan",
+    "last_name": "",
+    "initials": "Mr. KM",
+    "email": "mr.kmlib@sece.ac.in",
+    "department": 32,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.faculty",
+  "pk": 106,
+  "fields": {
+    "faculty_id": "ECE012",
+    "first_name": "Sandhya",
+    "last_name": "G",
+    "initials": "Ms.SG",
+    "email": "",
+    "department": 27,
+    "designation": "ASST_PROF"
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 151,
+  "fields": {
+    "code": "MA3452",
+    "name": "Probability and Statistics",
+    "short_name": "P&S",
+    "subject_type": "THEORY",
+    "credits": 4,
+    "weekly_hours": 5,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 152,
+  "fields": {
+    "code": "CS3452",
+    "name": "Operating Systems",
+    "short_name": "OS",
+    "subject_type": "THEORY",
+    "credits": 3,
+    "weekly_hours": 4,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 153,
+  "fields": {
+    "code": "CS3491",
+    "name": "Machine Learning",
+    "short_name": "ML",
+    "subject_type": "THEORY",
+    "credits": 3,
+    "weekly_hours": 5,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 154,
+  "fields": {
+    "code": "CS3492",
+    "name": "Database Management Systems",
+    "short_name": "DBMS",
+    "subject_type": "THEORY",
+    "credits": 3,
+    "weekly_hours": 4,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 155,
+  "fields": {
+    "code": "CW3551",
+    "name": "Full Stack Development",
+    "short_name": "FSD",
+    "subject_type": "THEORY",
+    "credits": 3,
+    "weekly_hours": 4,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 156,
+  "fields": {
+    "code": "GE3451",
+    "name": "Environmental Science",
+    "short_name": "EVS",
+    "subject_type": "COMMON",
+    "credits": 2,
+    "weekly_hours": 2,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 157,
+  "fields": {
+    "code": "CS3481",
+    "name": "Machine Learning Lab",
+    "short_name": "ML Lab",
+    "subject_type": "LAB",
+    "credits": 1,
+    "weekly_hours": 3,
+    "max_students": 40,
+    "lab_duration_slots": 3
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 158,
+  "fields": {
+    "code": "CS3482",
+    "name": "DBMS Lab",
+    "short_name": "DBMS Lab",
+    "subject_type": "LAB",
+    "credits": 1,
+    "weekly_hours": 3,
+    "max_students": 40,
+    "lab_duration_slots": 3
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 159,
+  "fields": {
+    "code": "CW3552",
+    "name": "Full Stack Development Lab",
+    "short_name": "FSD Lab",
+    "subject_type": "LAB",
+    "credits": 2,
+    "weekly_hours": 3,
+    "max_students": 40,
+    "lab_duration_slots": 3
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 160,
+  "fields": {
+    "code": "AC3401",
+    "name": "Library Hour",
+    "short_name": "LIB",
+    "subject_type": "COMMON",
+    "credits": 0,
+    "weekly_hours": 1,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 161,
+  "fields": {
+    "code": "AC3402",
+    "name": "Aptitude Training",
+    "short_name": "APTI",
+    "subject_type": "COMMON",
+    "credits": 0,
+    "weekly_hours": 1,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 162,
+  "fields": {
+    "code": "AC3403",
+    "name": "Tutor Ward Meeting",
+    "short_name": "TWH",
+    "subject_type": "COMMON",
+    "credits": 0,
+    "weekly_hours": 1,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 163,
+  "fields": {
+    "code": "AC3404",
+    "name": "Soft Skills",
+    "short_name": "SS",
+    "subject_type": "COMMON",
+    "credits": 0,
+    "weekly_hours": 2,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 164,
+  "fields": {
+    "code": "AC3405",
+    "name": "Project with Design Thinking",
+    "short_name": "PDT",
+    "subject_type": "COMMON",
+    "credits": 0,
+    "weekly_hours": 3,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 165,
+  "fields": {
+    "code": "AC3406",
+    "name": "Center of Excellence",
+    "short_name": "COE",
+    "subject_type": "COMMON",
+    "credits": 0,
+    "weekly_hours": 1,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 166,
+  "fields": {
+    "code": "AC3407",
+    "name": "Universal Human Values",
+    "short_name": "UHV",
+    "subject_type": "COMMON",
+    "credits": 0,
+    "weekly_hours": 2,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 167,
+  "fields": {
+    "code": "CS3301",
+    "name": "Data Structures",
+    "short_name": "DSA",
+    "subject_type": "THEORY",
+    "credits": 3,
+    "weekly_hours": 5,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 168,
+  "fields": {
+    "code": "CS3302",
+    "name": "Computer Networks",
+    "short_name": "CN",
+    "subject_type": "THEORY",
+    "credits": 3,
+    "weekly_hours": 4,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 169,
+  "fields": {
+    "code": "CS3303",
+    "name": "Compiler Design",
+    "short_name": "CD",
+    "subject_type": "THEORY",
+    "credits": 3,
+    "weekly_hours": 4,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 170,
+  "fields": {
+    "code": "PE3001",
+    "name": "Cloud Computing",
+    "short_name": "CC",
+    "subject_type": "ELECTIVE",
+    "credits": 3,
+    "weekly_hours": 3,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 171,
+  "fields": {
+    "code": "CS3401",
+    "name": "Data Science",
+    "short_name": "DS",
+    "subject_type": "THEORY",
+    "credits": 3,
+    "weekly_hours": 4,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 172,
+  "fields": {
+    "code": "CS3402",
+    "name": "Data Science Lab",
+    "short_name": "DS Lab",
+    "subject_type": "LAB",
+    "credits": 1,
+    "weekly_hours": 3,
+    "max_students": 40,
+    "lab_duration_slots": 3
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 173,
+  "fields": {
+    "code": "CS3501",
+    "name": "Software Engineering",
+    "short_name": "SE",
+    "subject_type": "THEORY",
+    "credits": 3,
+    "weekly_hours": 4,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 174,
+  "fields": {
+    "code": "CS3502",
+    "name": "Software Engineering Lab",
+    "short_name": "SE Lab",
+    "subject_type": "LAB",
+    "credits": 1,
+    "weekly_hours": 3,
+    "max_students": 40,
+    "lab_duration_slots": 3
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 175,
+  "fields": {
+    "code": "AC3501",
+    "name": "Placement Training",
+    "short_name": "PT",
+    "subject_type": "COMMON",
+    "credits": 0,
+    "weekly_hours": 3,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 176,
+  "fields": {
+    "code": "AC3502",
+    "name": "Project Work",
+    "short_name": "PW",
+    "subject_type": "COMMON",
+    "credits": 0,
+    "weekly_hours": 5,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 177,
+  "fields": {
+    "code": "AC3503",
+    "name": "Technical Seminar",
+    "short_name": "TS",
+    "subject_type": "COMMON",
+    "credits": 0,
+    "weekly_hours": 2,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 178,
+  "fields": {
+    "code": "AC3504",
+    "name": "Library Hour",
+    "short_name": "LIB",
+    "subject_type": "COMMON",
+    "credits": 0,
+    "weekly_hours": 2,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 179,
+  "fields": {
+    "code": "MA1101",
+    "name": "Engineering Mathematics I",
+    "short_name": "Maths I",
+    "subject_type": "THEORY",
+    "credits": 4,
+    "weekly_hours": 5,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 180,
+  "fields": {
+    "code": "PH1101",
+    "name": "Engineering Physics",
+    "short_name": "Physics",
+    "subject_type": "THEORY",
+    "credits": 3,
+    "weekly_hours": 5,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 181,
+  "fields": {
+    "code": "CY1101",
+    "name": "Engineering Chemistry",
+    "short_name": "Chemistry",
+    "subject_type": "THEORY",
+    "credits": 3,
+    "weekly_hours": 5,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 182,
+  "fields": {
+    "code": "GE1101",
+    "name": "Problem Solving & Python",
+    "short_name": "Python",
+    "subject_type": "THEORY",
+    "credits": 3,
+    "weekly_hours": 5,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 183,
+  "fields": {
+    "code": "EC1101",
+    "name": "Basic Electrical Engineering",
+    "short_name": "BEE",
+    "subject_type": "THEORY",
+    "credits": 3,
+    "weekly_hours": 5,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 184,
+  "fields": {
+    "code": "GE1102",
+    "name": "Heritage of Tamil",
+    "short_name": "Tamil",
+    "subject_type": "COMMON",
+    "credits": 1,
+    "weekly_hours": 2,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 185,
+  "fields": {
+    "code": "PH1102",
+    "name": "Physics Lab",
+    "short_name": "Phy Lab",
+    "subject_type": "LAB",
+    "credits": 1,
+    "weekly_hours": 3,
+    "max_students": 40,
+    "lab_duration_slots": 3
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 186,
+  "fields": {
+    "code": "GE1103",
+    "name": "Python Lab",
+    "short_name": "Py Lab",
+    "subject_type": "LAB",
+    "credits": 1,
+    "weekly_hours": 3,
+    "max_students": 40,
+    "lab_duration_slots": 3
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 187,
+  "fields": {
+    "code": "AC1101",
+    "name": "Engineering Graphics",
+    "short_name": "EG",
+    "subject_type": "THEORY",
+    "credits": 2,
+    "weekly_hours": 3,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 188,
+  "fields": {
+    "code": "AC1102",
+    "name": "Sports / Yoga",
+    "short_name": "Sports",
+    "subject_type": "COMMON",
+    "credits": 0,
+    "weekly_hours": 3,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 189,
+  "fields": {
+    "code": "AC1103",
+    "name": "Library Hour",
+    "short_name": "LIB",
+    "subject_type": "COMMON",
+    "credits": 0,
+    "weekly_hours": 2,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 190,
+  "fields": {
+    "code": "AC1104",
+    "name": "Soft Skills",
+    "short_name": "SS",
+    "subject_type": "COMMON",
+    "credits": 0,
+    "weekly_hours": 1,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.subject",
+  "pk": 191,
+  "fields": {
+    "code": "U23CB401",
+    "name": "Operating Systems Laboratory",
+    "short_name": "OS Lab",
+    "subject_type": "LAB",
+    "credits": 1,
+    "weekly_hours": 3,
+    "max_students": 60,
+    "lab_duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.section",
+  "pk": 28,
+  "fields": {
+    "name": "A",
+    "year_of_study": 3,
+    "semester": 5,
+    "department": 26,
+    "program": 22,
+    "academic_year": 11,
+    "strength": 55
+  }
+},
+{
+  "model": "SchedulerApp.section",
+  "pk": 29,
+  "fields": {
+    "name": "B",
+    "year_of_study": 3,
+    "semester": 5,
+    "department": 26,
+    "program": 22,
+    "academic_year": 11,
+    "strength": 55
+  }
+},
+{
+  "model": "SchedulerApp.section",
+  "pk": 30,
+  "fields": {
+    "name": "A",
+    "year_of_study": 1,
+    "semester": 1,
+    "department": 27,
+    "program": 24,
+    "academic_year": 11,
+    "strength": 60
+  }
+},
+{
+  "model": "SchedulerApp.section",
+  "pk": 32,
+  "fields": {
+    "name": "A",
+    "year_of_study": 2,
+    "semester": 4,
+    "department": 31,
+    "program": 26,
+    "academic_year": 11,
+    "strength": 60
+  }
+},
+{
+  "model": "SchedulerApp.section",
+  "pk": 33,
+  "fields": {
+    "name": "A",
+    "year_of_study": 1,
+    "semester": 1,
+    "department": 28,
+    "program": 27,
+    "academic_year": 11,
+    "strength": 60
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 283,
+  "fields": {
+    "subject": 167,
+    "section": 28,
+    "weekly_hours_override": null,
+    "faculty": [
+      71
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 284,
+  "fields": {
+    "subject": 168,
+    "section": 28,
+    "weekly_hours_override": null,
+    "faculty": [
+      74
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 285,
+  "fields": {
+    "subject": 169,
+    "section": 28,
+    "weekly_hours_override": null,
+    "faculty": [
+      76
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 286,
+  "fields": {
+    "subject": 170,
+    "section": 28,
+    "weekly_hours_override": null,
+    "faculty": [
+      78
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 287,
+  "fields": {
+    "subject": 171,
+    "section": 28,
+    "weekly_hours_override": null,
+    "faculty": [
+      75
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 288,
+  "fields": {
+    "subject": 173,
+    "section": 28,
+    "weekly_hours_override": null,
+    "faculty": [
+      79
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 289,
+  "fields": {
+    "subject": 172,
+    "section": 28,
+    "weekly_hours_override": null,
+    "faculty": [
+      75,
+      82
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 290,
+  "fields": {
+    "subject": 174,
+    "section": 28,
+    "weekly_hours_override": null,
+    "faculty": [
+      79,
+      82
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 291,
+  "fields": {
+    "subject": 175,
+    "section": 28,
+    "weekly_hours_override": null,
+    "faculty": [
+      72
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 292,
+  "fields": {
+    "subject": 176,
+    "section": 28,
+    "weekly_hours_override": null,
+    "faculty": [
+      71
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 293,
+  "fields": {
+    "subject": 177,
+    "section": 28,
+    "weekly_hours_override": null,
+    "faculty": [
+      80
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 294,
+  "fields": {
+    "subject": 178,
+    "section": 28,
+    "weekly_hours_override": null,
+    "faculty": [
+      72
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 295,
+  "fields": {
+    "subject": 167,
+    "section": 29,
+    "weekly_hours_override": null,
+    "faculty": [
+      73
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 296,
+  "fields": {
+    "subject": 168,
+    "section": 29,
+    "weekly_hours_override": null,
+    "faculty": [
+      74
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 297,
+  "fields": {
+    "subject": 169,
+    "section": 29,
+    "weekly_hours_override": null,
+    "faculty": [
+      76
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 298,
+  "fields": {
+    "subject": 170,
+    "section": 29,
+    "weekly_hours_override": null,
+    "faculty": [
+      81
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 299,
+  "fields": {
+    "subject": 171,
+    "section": 29,
+    "weekly_hours_override": null,
+    "faculty": [
+      79
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 300,
+  "fields": {
+    "subject": 173,
+    "section": 29,
+    "weekly_hours_override": null,
+    "faculty": [
+      79
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 301,
+  "fields": {
+    "subject": 172,
+    "section": 29,
+    "weekly_hours_override": null,
+    "faculty": [
+      79,
+      82
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 302,
+  "fields": {
+    "subject": 174,
+    "section": 29,
+    "weekly_hours_override": null,
+    "faculty": [
+      79,
+      82
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 303,
+  "fields": {
+    "subject": 175,
+    "section": 29,
+    "weekly_hours_override": null,
+    "faculty": [
+      72
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 304,
+  "fields": {
+    "subject": 176,
+    "section": 29,
+    "weekly_hours_override": null,
+    "faculty": [
+      71
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 305,
+  "fields": {
+    "subject": 177,
+    "section": 29,
+    "weekly_hours_override": null,
+    "faculty": [
+      80
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 306,
+  "fields": {
+    "subject": 178,
+    "section": 29,
+    "weekly_hours_override": null,
+    "faculty": [
+      72
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 307,
+  "fields": {
+    "subject": 179,
+    "section": 30,
+    "weekly_hours_override": null,
+    "faculty": [
+      72
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 308,
+  "fields": {
+    "subject": 180,
+    "section": 30,
+    "weekly_hours_override": null,
+    "faculty": [
+      83
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 309,
+  "fields": {
+    "subject": 181,
+    "section": 30,
+    "weekly_hours_override": null,
+    "faculty": [
+      84
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 310,
+  "fields": {
+    "subject": 182,
+    "section": 30,
+    "weekly_hours_override": null,
+    "faculty": [
+      80
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 311,
+  "fields": {
+    "subject": 183,
+    "section": 30,
+    "weekly_hours_override": null,
+    "faculty": [
+      83
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 312,
+  "fields": {
+    "subject": 184,
+    "section": 30,
+    "weekly_hours_override": null,
+    "faculty": [
+      80
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 313,
+  "fields": {
+    "subject": 185,
+    "section": 30,
+    "weekly_hours_override": null,
+    "faculty": [
+      83
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 314,
+  "fields": {
+    "subject": 186,
+    "section": 30,
+    "weekly_hours_override": null,
+    "faculty": [
+      80
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 315,
+  "fields": {
+    "subject": 187,
+    "section": 30,
+    "weekly_hours_override": null,
+    "faculty": [
+      84
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 316,
+  "fields": {
+    "subject": 188,
+    "section": 30,
+    "weekly_hours_override": null,
+    "faculty": [
+      83
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 317,
+  "fields": {
+    "subject": 189,
+    "section": 30,
+    "weekly_hours_override": null,
+    "faculty": [
+      83
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 318,
+  "fields": {
+    "subject": 190,
+    "section": 30,
+    "weekly_hours_override": null,
+    "faculty": [
+      84
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 344,
+  "fields": {
+    "subject": 157,
+    "section": 30,
+    "weekly_hours_override": null,
+    "faculty": [
+      106
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 347,
+  "fields": {
+    "subject": 175,
+    "section": 33,
+    "weekly_hours_override": null,
+    "faculty": [
+      104
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 348,
+  "fields": {
+    "subject": 171,
+    "section": 33,
+    "weekly_hours_override": null,
+    "faculty": [
+      89
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 349,
+  "fields": {
+    "subject": 162,
+    "section": 33,
+    "weekly_hours_override": null,
+    "faculty": [
+      102
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 350,
+  "fields": {
+    "subject": 177,
+    "section": 33,
+    "weekly_hours_override": null,
+    "faculty": [
+      103
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 351,
+  "fields": {
+    "subject": 155,
+    "section": 32,
+    "weekly_hours_override": null,
+    "faculty": [
+      96
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 352,
+  "fields": {
+    "subject": 159,
+    "section": 32,
+    "weekly_hours_override": null,
+    "faculty": [
+      97
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 353,
+  "fields": {
+    "subject": 152,
+    "section": 32,
+    "weekly_hours_override": null,
+    "faculty": [
+      99
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 354,
+  "fields": {
+    "subject": 157,
+    "section": 32,
+    "weekly_hours_override": null,
+    "faculty": [
+      99,
+      97,
+      91
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 355,
+  "fields": {
+    "subject": 162,
+    "section": 32,
+    "weekly_hours_override": null,
+    "faculty": [
+      97
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 356,
+  "fields": {
+    "subject": 151,
+    "section": 32,
+    "weekly_hours_override": null,
+    "faculty": [
+      101
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 357,
+  "fields": {
+    "subject": 161,
+    "section": 32,
+    "weekly_hours_override": null,
+    "faculty": [
+      104
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 358,
+  "fields": {
+    "subject": 172,
+    "section": 32,
+    "weekly_hours_override": null,
+    "faculty": [
+      89,
+      88,
+      97
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 359,
+  "fields": {
+    "subject": 189,
+    "section": 32,
+    "weekly_hours_override": null,
+    "faculty": [
+      97
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 360,
+  "fields": {
+    "subject": 171,
+    "section": 32,
+    "weekly_hours_override": null,
+    "faculty": [
+      97
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 361,
+  "fields": {
+    "subject": 153,
+    "section": 32,
+    "weekly_hours_override": null,
+    "faculty": [
+      91
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 362,
+  "fields": {
+    "subject": 166,
+    "section": 32,
+    "weekly_hours_override": null,
+    "faculty": [
+      102
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 363,
+  "fields": {
+    "subject": 176,
+    "section": 32,
+    "weekly_hours_override": null,
+    "faculty": [
+      106
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 364,
+  "fields": {
+    "subject": 163,
+    "section": 32,
+    "weekly_hours_override": null,
+    "faculty": [
+      103
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 365,
+  "fields": {
+    "subject": 191,
+    "section": 32,
+    "weekly_hours_override": null,
+    "faculty": [
+      99,
+      90
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.courseoffering",
+  "pk": 366,
+  "fields": {
+    "subject": 165,
+    "section": 32,
+    "weekly_hours_override": null,
+    "faculty": [
+      89,
+      86
+    ]
+  }
+},
+{
+  "model": "SchedulerApp.timetable",
+  "pk": 35,
+  "fields": {
+    "section": 29,
+    "academic_year": 11,
+    "status": "DRAFT",
+    "generated_at": "2026-04-06T07:17:45.440Z",
+    "updated_at": "2026-04-06T07:17:45.440Z",
+    "fitness_score": 0.00012158054711246201,
+    "generations_run": 112
+  }
+},
+{
+  "model": "SchedulerApp.timetable",
+  "pk": 46,
+  "fields": {
+    "section": 28,
+    "academic_year": 11,
+    "status": "PUBLISHED",
+    "generated_at": "2026-04-09T05:33:12.236Z",
+    "updated_at": "2026-04-11T06:58:26.217Z",
+    "fitness_score": 0.14285714285714285,
+    "generations_run": 900
+  }
+},
+{
+  "model": "SchedulerApp.timetable",
+  "pk": 61,
+  "fields": {
+    "section": 33,
+    "academic_year": 11,
+    "status": "DRAFT",
+    "generated_at": "2026-04-11T07:13:09.807Z",
+    "updated_at": "2026-04-11T07:13:09.807Z",
+    "fitness_score": 0.007518796992481203,
+    "generations_run": 1000
+  }
+},
+{
+  "model": "SchedulerApp.timetable",
+  "pk": 62,
+  "fields": {
+    "section": 28,
+    "academic_year": 11,
+    "status": "PUBLISHED",
+    "generated_at": "2026-04-15T06:30:06.070Z",
+    "updated_at": "2026-04-15T06:30:13.354Z",
+    "fitness_score": 0.14285714285714285,
+    "generations_run": 900
+  }
+},
+{
+  "model": "SchedulerApp.timetable",
+  "pk": 70,
+  "fields": {
+    "section": 32,
+    "academic_year": 11,
+    "status": "DRAFT",
+    "generated_at": "2026-04-18T07:09:16.882Z",
+    "updated_at": "2026-04-18T07:09:16.883Z",
+    "fitness_score": 0.005917159763313609,
+    "generations_run": 1000
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1009,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 303,
+    "time_slot": 305,
+    "room": 53,
+    "faculty": 72,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1010,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 303,
+    "time_slot": 271,
+    "room": 52,
+    "faculty": 72,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1011,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 303,
+    "time_slot": 261,
+    "room": 55,
+    "faculty": 72,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1012,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 304,
+    "time_slot": 257,
+    "room": 52,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1013,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 304,
+    "time_slot": 293,
+    "room": 51,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1014,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 304,
+    "time_slot": 290,
+    "room": 51,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1015,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 304,
+    "time_slot": 275,
+    "room": 54,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1016,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 304,
+    "time_slot": 299,
+    "room": 55,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1017,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 305,
+    "time_slot": 296,
+    "room": 55,
+    "faculty": 80,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1018,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 305,
+    "time_slot": 301,
+    "room": 54,
+    "faculty": 80,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1019,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 306,
+    "time_slot": 312,
+    "room": 56,
+    "faculty": 72,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1020,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 306,
+    "time_slot": 254,
+    "room": 55,
+    "faculty": 72,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1021,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 295,
+    "time_slot": 263,
+    "room": 54,
+    "faculty": 73,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1022,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 295,
+    "time_slot": 292,
+    "room": 52,
+    "faculty": 73,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1023,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 295,
+    "time_slot": 261,
+    "room": 52,
+    "faculty": 73,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1024,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 295,
+    "time_slot": 290,
+    "room": 54,
+    "faculty": 73,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1025,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 295,
+    "time_slot": 262,
+    "room": 52,
+    "faculty": 73,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1026,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 296,
+    "time_slot": 284,
+    "room": 51,
+    "faculty": 74,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1027,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 296,
+    "time_slot": 286,
+    "room": 55,
+    "faculty": 74,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1028,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 296,
+    "time_slot": 318,
+    "room": 53,
+    "faculty": 74,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1029,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 296,
+    "time_slot": 298,
+    "room": 52,
+    "faculty": 74,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1030,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 297,
+    "time_slot": 284,
+    "room": 54,
+    "faculty": 76,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1031,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 297,
+    "time_slot": 302,
+    "room": 52,
+    "faculty": 76,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1032,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 297,
+    "time_slot": 260,
+    "room": 54,
+    "faculty": 76,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1033,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 297,
+    "time_slot": 265,
+    "room": 53,
+    "faculty": 76,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1034,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 299,
+    "time_slot": 260,
+    "room": 54,
+    "faculty": 79,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1035,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 299,
+    "time_slot": 253,
+    "room": 54,
+    "faculty": 79,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1036,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 299,
+    "time_slot": 272,
+    "room": 52,
+    "faculty": 79,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1037,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 299,
+    "time_slot": 296,
+    "room": 55,
+    "faculty": 79,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1038,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 301,
+    "time_slot": 295,
+    "room": 59,
+    "faculty": 82,
+    "entry_type": "LAB",
+    "duration_slots": 3
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1039,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 300,
+    "time_slot": 316,
+    "room": 54,
+    "faculty": 79,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1040,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 300,
+    "time_slot": 283,
+    "room": 54,
+    "faculty": 79,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1041,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 300,
+    "time_slot": 268,
+    "room": 51,
+    "faculty": 79,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1042,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 300,
+    "time_slot": 268,
+    "room": 56,
+    "faculty": 79,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1043,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 302,
+    "time_slot": 286,
+    "room": 60,
+    "faculty": 79,
+    "entry_type": "LAB",
+    "duration_slots": 3
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1044,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 298,
+    "time_slot": 259,
+    "room": 53,
+    "faculty": 81,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1045,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 298,
+    "time_slot": 274,
+    "room": 52,
+    "faculty": 81,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1046,
+  "fields": {
+    "timetable": 35,
+    "course_offering": 298,
+    "time_slot": 256,
+    "room": 51,
+    "faculty": 81,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1369,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 291,
+    "time_slot": 284,
+    "room": 51,
+    "faculty": 72,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1370,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 291,
+    "time_slot": 260,
+    "room": 54,
+    "faculty": 72,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1371,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 291,
+    "time_slot": 298,
+    "room": 55,
+    "faculty": 72,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1372,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 292,
+    "time_slot": 263,
+    "room": 54,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1373,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 292,
+    "time_slot": 275,
+    "room": 55,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1374,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 292,
+    "time_slot": 304,
+    "room": 55,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1375,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 292,
+    "time_slot": 316,
+    "room": 54,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1376,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 292,
+    "time_slot": 254,
+    "room": 55,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1377,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 293,
+    "time_slot": 283,
+    "room": 51,
+    "faculty": 80,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1378,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 293,
+    "time_slot": 265,
+    "room": 51,
+    "faculty": 80,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1379,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 294,
+    "time_slot": 292,
+    "room": 53,
+    "faculty": 72,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1380,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 294,
+    "time_slot": 302,
+    "room": 52,
+    "faculty": 72,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1381,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 283,
+    "time_slot": 259,
+    "room": 53,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1382,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 283,
+    "time_slot": 281,
+    "room": 54,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1383,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 283,
+    "time_slot": 257,
+    "room": 53,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1384,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 283,
+    "time_slot": 274,
+    "room": 55,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1385,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 283,
+    "time_slot": 266,
+    "room": 52,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1386,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 284,
+    "time_slot": 289,
+    "room": 56,
+    "faculty": 74,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1387,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 284,
+    "time_slot": 310,
+    "room": 52,
+    "faculty": 74,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1388,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 284,
+    "time_slot": 261,
+    "room": 54,
+    "faculty": 74,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1389,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 284,
+    "time_slot": 318,
+    "room": 53,
+    "faculty": 74,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1390,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 285,
+    "time_slot": 295,
+    "room": 56,
+    "faculty": 76,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1391,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 285,
+    "time_slot": 280,
+    "room": 51,
+    "faculty": 76,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1392,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 285,
+    "time_slot": 269,
+    "room": 55,
+    "faculty": 76,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1393,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 285,
+    "time_slot": 271,
+    "room": 51,
+    "faculty": 76,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1394,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 287,
+    "time_slot": 253,
+    "room": 51,
+    "faculty": 75,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1395,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 287,
+    "time_slot": 299,
+    "room": 51,
+    "faculty": 75,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1396,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 287,
+    "time_slot": 296,
+    "room": 55,
+    "faculty": 75,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1397,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 287,
+    "time_slot": 290,
+    "room": 53,
+    "faculty": 75,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1398,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 289,
+    "time_slot": 286,
+    "room": 61,
+    "faculty": 82,
+    "entry_type": "LAB",
+    "duration_slots": 3
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1399,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 288,
+    "time_slot": 268,
+    "room": 51,
+    "faculty": 79,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1400,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 288,
+    "time_slot": 293,
+    "room": 56,
+    "faculty": 79,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1401,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 288,
+    "time_slot": 305,
+    "room": 56,
+    "faculty": 79,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1402,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 288,
+    "time_slot": 256,
+    "room": 52,
+    "faculty": 79,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1403,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 290,
+    "time_slot": 277,
+    "room": 58,
+    "faculty": 79,
+    "entry_type": "LAB",
+    "duration_slots": 3
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1404,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 286,
+    "time_slot": 272,
+    "room": 53,
+    "faculty": 78,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1405,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 286,
+    "time_slot": 262,
+    "room": 54,
+    "faculty": 78,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1406,
+  "fields": {
+    "timetable": 46,
+    "course_offering": 286,
+    "time_slot": 301,
+    "room": 51,
+    "faculty": 78,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1850,
+  "fields": {
+    "timetable": 61,
+    "course_offering": 349,
+    "time_slot": 289,
+    "room": 51,
+    "faculty": 102,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1851,
+  "fields": {
+    "timetable": 61,
+    "course_offering": 347,
+    "time_slot": 263,
+    "room": 56,
+    "faculty": 104,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1852,
+  "fields": {
+    "timetable": 61,
+    "course_offering": 347,
+    "time_slot": 314,
+    "room": 54,
+    "faculty": 104,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1853,
+  "fields": {
+    "timetable": 61,
+    "course_offering": 347,
+    "time_slot": 278,
+    "room": 51,
+    "faculty": 104,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1854,
+  "fields": {
+    "timetable": 61,
+    "course_offering": 350,
+    "time_slot": 275,
+    "room": 52,
+    "faculty": 103,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1855,
+  "fields": {
+    "timetable": 61,
+    "course_offering": 350,
+    "time_slot": 299,
+    "room": 51,
+    "faculty": 103,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1856,
+  "fields": {
+    "timetable": 61,
+    "course_offering": 348,
+    "time_slot": 284,
+    "room": 51,
+    "faculty": 89,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1857,
+  "fields": {
+    "timetable": 61,
+    "course_offering": 348,
+    "time_slot": 260,
+    "room": 54,
+    "faculty": 89,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1858,
+  "fields": {
+    "timetable": 61,
+    "course_offering": 348,
+    "time_slot": 304,
+    "room": 55,
+    "faculty": 89,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1859,
+  "fields": {
+    "timetable": 61,
+    "course_offering": 348,
+    "time_slot": 271,
+    "room": 52,
+    "faculty": 89,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1864,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 291,
+    "time_slot": 257,
+    "room": 55,
+    "faculty": 72,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1865,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 291,
+    "time_slot": 274,
+    "room": 54,
+    "faculty": 72,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1866,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 291,
+    "time_slot": 314,
+    "room": 53,
+    "faculty": 72,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1867,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 292,
+    "time_slot": 299,
+    "room": 53,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1868,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 292,
+    "time_slot": 292,
+    "room": 56,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1869,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 292,
+    "time_slot": 275,
+    "room": 53,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1870,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 292,
+    "time_slot": 266,
+    "room": 52,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1871,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 292,
+    "time_slot": 254,
+    "room": 56,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1872,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 293,
+    "time_slot": 301,
+    "room": 52,
+    "faculty": 80,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1873,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 293,
+    "time_slot": 268,
+    "room": 54,
+    "faculty": 80,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1874,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 294,
+    "time_slot": 272,
+    "room": 55,
+    "faculty": 72,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1875,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 294,
+    "time_slot": 262,
+    "room": 54,
+    "faculty": 72,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1876,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 283,
+    "time_slot": 256,
+    "room": 56,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1877,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 283,
+    "time_slot": 293,
+    "room": 55,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1878,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 283,
+    "time_slot": 304,
+    "room": 51,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1879,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 283,
+    "time_slot": 287,
+    "room": 52,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1880,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 283,
+    "time_slot": 269,
+    "room": 51,
+    "faculty": 71,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1881,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 284,
+    "time_slot": 263,
+    "room": 54,
+    "faculty": 74,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1882,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 284,
+    "time_slot": 253,
+    "room": 51,
+    "faculty": 74,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1883,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 284,
+    "time_slot": 271,
+    "room": 52,
+    "faculty": 74,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1884,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 284,
+    "time_slot": 284,
+    "room": 53,
+    "faculty": 74,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1885,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 285,
+    "time_slot": 298,
+    "room": 54,
+    "faculty": 76,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1886,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 285,
+    "time_slot": 312,
+    "room": 53,
+    "faculty": 76,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1887,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 285,
+    "time_slot": 289,
+    "room": 56,
+    "faculty": 76,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1888,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 285,
+    "time_slot": 318,
+    "room": 52,
+    "faculty": 76,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1889,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 287,
+    "time_slot": 277,
+    "room": 53,
+    "faculty": 75,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1890,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 287,
+    "time_slot": 302,
+    "room": 56,
+    "faculty": 75,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1891,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 287,
+    "time_slot": 310,
+    "room": 55,
+    "faculty": 75,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1892,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 287,
+    "time_slot": 280,
+    "room": 52,
+    "faculty": 75,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1893,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 289,
+    "time_slot": 259,
+    "room": 60,
+    "faculty": 75,
+    "entry_type": "LAB",
+    "duration_slots": 3
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1894,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 288,
+    "time_slot": 281,
+    "room": 55,
+    "faculty": 79,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1895,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 288,
+    "time_slot": 305,
+    "room": 52,
+    "faculty": 79,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1896,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 288,
+    "time_slot": 278,
+    "room": 55,
+    "faculty": 79,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1897,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 288,
+    "time_slot": 283,
+    "room": 51,
+    "faculty": 79,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1898,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 290,
+    "time_slot": 295,
+    "room": 60,
+    "faculty": 82,
+    "entry_type": "LAB",
+    "duration_slots": 3
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1899,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 286,
+    "time_slot": 286,
+    "room": 54,
+    "faculty": 78,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1900,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 286,
+    "time_slot": 290,
+    "room": 51,
+    "faculty": 78,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 1901,
+  "fields": {
+    "timetable": 62,
+    "course_offering": 286,
+    "time_slot": 265,
+    "room": 55,
+    "faculty": 78,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2196,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 358,
+    "time_slot": 271,
+    "room": 60,
+    "faculty": 97,
+    "entry_type": "LAB",
+    "duration_slots": 3
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2197,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 354,
+    "time_slot": 262,
+    "room": 58,
+    "faculty": 99,
+    "entry_type": "LAB",
+    "duration_slots": 3
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2198,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 352,
+    "time_slot": 280,
+    "room": 61,
+    "faculty": 97,
+    "entry_type": "LAB",
+    "duration_slots": 3
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2199,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 365,
+    "time_slot": 296,
+    "room": 59,
+    "faculty": 99,
+    "entry_type": "LAB",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2200,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 365,
+    "time_slot": 254,
+    "room": 59,
+    "faculty": 99,
+    "entry_type": "LAB",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2201,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 365,
+    "time_slot": 300,
+    "room": 60,
+    "faculty": 99,
+    "entry_type": "LAB",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2202,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 359,
+    "time_slot": 310,
+    "room": 62,
+    "faculty": 97,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2203,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 359,
+    "time_slot": 255,
+    "room": 62,
+    "faculty": 97,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2204,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 357,
+    "time_slot": 258,
+    "room": 51,
+    "faculty": 104,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2205,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 355,
+    "time_slot": 275,
+    "room": 51,
+    "faculty": 97,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2206,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 364,
+    "time_slot": 315,
+    "room": 51,
+    "faculty": 103,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2207,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 364,
+    "time_slot": 289,
+    "room": 51,
+    "faculty": 103,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2208,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 366,
+    "time_slot": 293,
+    "room": 51,
+    "faculty": 89,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2209,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 362,
+    "time_slot": 308,
+    "room": 51,
+    "faculty": 102,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2210,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 362,
+    "time_slot": 309,
+    "room": 51,
+    "faculty": 102,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2211,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 363,
+    "time_slot": 257,
+    "room": 51,
+    "faculty": 106,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2212,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 363,
+    "time_slot": 285,
+    "room": 51,
+    "faculty": 106,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2213,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 363,
+    "time_slot": 303,
+    "room": 51,
+    "faculty": 106,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2214,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 363,
+    "time_slot": 318,
+    "room": 51,
+    "faculty": 106,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2215,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 363,
+    "time_slot": 312,
+    "room": 51,
+    "faculty": 106,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2216,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 360,
+    "time_slot": 266,
+    "room": 51,
+    "faculty": 97,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2217,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 360,
+    "time_slot": 317,
+    "room": 51,
+    "faculty": 97,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2218,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 360,
+    "time_slot": 291,
+    "room": 51,
+    "faculty": 97,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2219,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 360,
+    "time_slot": 311,
+    "room": 51,
+    "faculty": 97,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2220,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 353,
+    "time_slot": 267,
+    "room": 51,
+    "faculty": 99,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2221,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 353,
+    "time_slot": 290,
+    "room": 51,
+    "faculty": 99,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2222,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 353,
+    "time_slot": 305,
+    "room": 51,
+    "faculty": 99,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2223,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 353,
+    "time_slot": 299,
+    "room": 51,
+    "faculty": 99,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2224,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 361,
+    "time_slot": 253,
+    "room": 51,
+    "faculty": 91,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2225,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 361,
+    "time_slot": 284,
+    "room": 51,
+    "faculty": 91,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2226,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 361,
+    "time_slot": 298,
+    "room": 51,
+    "faculty": 91,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2227,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 361,
+    "time_slot": 307,
+    "room": 51,
+    "faculty": 91,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2228,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 361,
+    "time_slot": 314,
+    "room": 51,
+    "faculty": 91,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2229,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 351,
+    "time_slot": 313,
+    "room": 51,
+    "faculty": 96,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2230,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 351,
+    "time_slot": 276,
+    "room": 51,
+    "faculty": 96,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2231,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 351,
+    "time_slot": 302,
+    "room": 51,
+    "faculty": 96,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2232,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 351,
+    "time_slot": 260,
+    "room": 51,
+    "faculty": 96,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2233,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 356,
+    "time_slot": 269,
+    "room": 51,
+    "faculty": 101,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2234,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 356,
+    "time_slot": 287,
+    "room": 51,
+    "faculty": 101,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2235,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 356,
+    "time_slot": 294,
+    "room": 51,
+    "faculty": 101,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2236,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 356,
+    "time_slot": 278,
+    "room": 51,
+    "faculty": 101,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.timetableentry",
+  "pk": 2237,
+  "fields": {
+    "timetable": 70,
+    "course_offering": 356,
+    "time_slot": 316,
+    "room": 51,
+    "faculty": 101,
+    "entry_type": "REGULAR",
+    "duration_slots": 1
+  }
+},
+{
+  "model": "SchedulerApp.userprofile",
+  "pk": 21,
+  "fields": {
+    "user": 1,
+    "role": "SUPER_ADMIN",
+    "department": 26,
+    "faculty_profile": null,
+    "section": null
+  }
+},
+{
+  "model": "SchedulerApp.userprofile",
+  "pk": 22,
+  "fields": {
+    "user": 2,
+    "role": "HOD",
+    "department": 26,
+    "faculty_profile": 71,
+    "section": null
+  }
+},
+{
+  "model": "SchedulerApp.userprofile",
+  "pk": 23,
+  "fields": {
+    "user": 3,
+    "role": "FACULTY",
+    "department": 26,
+    "faculty_profile": 73,
+    "section": null
+  }
+},
+{
+  "model": "SchedulerApp.userprofile",
+  "pk": 24,
+  "fields": {
+    "user": 4,
+    "role": "STUDENT",
+    "department": 26,
+    "faculty_profile": null,
+    "section": null
+  }
+}
+]

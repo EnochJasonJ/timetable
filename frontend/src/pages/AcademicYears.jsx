@@ -6,7 +6,7 @@ const AcademicYears = () => {
     const [years, setYears] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const [formData, setFormData] = useState({ label: '', is_active: false });
+    const [formData, setFormData] = useState({ label: '', start_date: '', end_date: '', is_current: false });
 
     useEffect(() => {
         fetchYears();
@@ -32,7 +32,7 @@ const AcademicYears = () => {
         e.preventDefault();
         try {
             await api.post('academic-years/', formData);
-            setFormData({ label: '', is_active: false });
+            setFormData({ label: '', start_date: '', end_date: '', is_current: false });
             fetchYears();
         } catch (err) {
             setError('Failed to add academic year');
@@ -40,7 +40,6 @@ const AcademicYears = () => {
     };
 
     const handleDelete = async (id) => {
-        if (!window.confirm('Delete academic year?')) return;
         await api.delete(`academic-years/${id}/`);
         setYears(years.filter(y => y.id !== id));
     };
@@ -62,7 +61,7 @@ const AcademicYears = () => {
                     <h3 className="font-semibold text-slate-800">Add Academic Year</h3>
                 </div>
                 <form onSubmit={handleSubmit} className="p-5 flex flex-wrap gap-4 items-end">
-                    <div className="flex-1 min-w-[200px]">
+                    <div className="flex-1 min-w-[150px]">
                         <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Year Label</label>
                         <input 
                             name="label" 
@@ -73,16 +72,38 @@ const AcademicYears = () => {
                             required 
                         />
                     </div>
+                    <div className="flex-1 min-w-[130px]">
+                        <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Start Date</label>
+                        <input 
+                            type="date"
+                            name="start_date" 
+                            value={formData.start_date} 
+                            onChange={handleChange} 
+                            className="w-full p-2 border rounded-lg text-sm outline-none" 
+                            required 
+                        />
+                    </div>
+                    <div className="flex-1 min-w-[130px]">
+                        <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">End Date</label>
+                        <input 
+                            type="date"
+                            name="end_date" 
+                            value={formData.end_date} 
+                            onChange={handleChange} 
+                            className="w-full p-2 border rounded-lg text-sm outline-none" 
+                            required 
+                        />
+                    </div>
                     <div className="flex items-center gap-2 pb-3">
                         <input 
                             type="checkbox" 
-                            name="is_active" 
-                            id="is_active"
-                            checked={formData.is_active} 
+                            name="is_current" 
+                            id="is_current"
+                            checked={formData.is_current} 
                             onChange={handleChange}
                             className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                         />
-                        <label htmlFor="is_active" className="text-sm text-slate-700">Set as Active</label>
+                        <label htmlFor="is_current" className="text-sm text-slate-700">Set as Active</label>
                     </div>
                     <button type="submit" className="bg-indigo-600 text-white p-2 px-4 rounded-lg text-sm font-medium hover:bg-indigo-700 flex items-center gap-2">
                         <PlusCircle size={16} /> Add Year
@@ -104,7 +125,7 @@ const AcademicYears = () => {
                             <tr key={y.id} className="hover:bg-slate-50/50">
                                 <td className="px-5 py-3 font-semibold text-slate-800">{y.label}</td>
                                 <td className="px-5 py-3">
-                                    {y.is_active ? (
+                                    {y.is_current ? (
                                         <span className="bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider">Active</span>
                                     ) : (
                                         <span className="bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider">Inactive</span>

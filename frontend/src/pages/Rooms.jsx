@@ -39,7 +39,6 @@ const Rooms = () => {
     };
 
     const handleDelete = async (id) => {
-        if (!window.confirm('Delete room?')) return;
         await api.delete(`rooms/${id}/`);
         setRooms(rooms.filter(r => r.id !== id));
     };

@@ -57,14 +57,16 @@ const TimetableGenerate = () => {
                     if (!res.data.running) {
                         setGenerating(false);
                         setTaskId(null);
-                        // If finished, we can either stay here or redirect. 
-                        // But we don't know the new timetable_id easily if multiple sections were generated.
-                        // Actually, the generator saves results. Let's redirect to the first section's timetable if available.
+                        // If finished, redirect to the newly generated timetable
                         if (res.data.generation > 0) {
-                            // Fetch recent timetables to find the one we just made
-                            const ttRes = await api.get('timetables/');
-                            if (ttRes.data.length > 0) {
-                                navigate(`/timetables/${ttRes.data[0].id}`);
+                            if (res.data.timetable_ids && res.data.timetable_ids.length > 0) {
+                                navigate(`/timetables/${res.data.timetable_ids[0]}`);
+                            } else {
+                                // Fallback
+                                const ttRes = await api.get('timetables/');
+                                if (ttRes.data.length > 0) {
+                                    navigate(`/timetables/${ttRes.data[0].id}`);
+                                }
                             }
                         }
                     }

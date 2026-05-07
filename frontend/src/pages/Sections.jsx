@@ -6,10 +6,11 @@ const Sections = () => {
     const [sections, setSections] = useState([]);
     const [departments, setDepartments] = useState([]);
     const [programs, setPrograms] = useState([]);
+    const [academicYears, setAcademicYears] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [formData, setFormData] = useState({ 
-        name: '', year_of_study: 1, semester: 1, department: '', program: '', academic_year: 1, strength: 60
+        name: '', year_of_study: 1, semester: 1, department: '', program: '', academic_year: '', strength: 60
     });
 
     useEffect(() => {
@@ -19,14 +20,12 @@ const Sections = () => {
                     api.get('sections/'),
                     api.get('departments/'),
                     api.get('programs/'),
-                    api.get('academic-years/').catch(() => ({ data: [] })) // Fallback if endpoint not added
+                    api.get('academic-years/').catch(() => ({ data: [] }))
                 ]);
                 setSections(secRes.data);
                 setDepartments(deptRes.data);
                 setPrograms(progRes.data);
-                
-                // If academic years API doesn't exist, we assume ID 1 in the dummy data 
-                // In production, we'd add an AcademicYear API view
+                setAcademicYears(yrRes.data);
             } catch (err) {
                 setError('Failed to load data');
             } finally {
@@ -42,7 +41,7 @@ const Sections = () => {
         e.preventDefault();
         try {
             await api.post('sections/', formData);
-            setFormData({ name: '', year_of_study: 1, semester: 1, department: '', program: '', academic_year: 1, strength: 60 });
+            setFormData({ name: '', year_of_study: 1, semester: 1, department: '', program: '', academic_year: '', strength: 60 });
             const response = await api.get('sections/');
             setSections(response.data);
         } catch (err) {
@@ -51,7 +50,6 @@ const Sections = () => {
     };
 
     const handleDelete = async (id) => {
-        if (!window.confirm('Delete section?')) return;
         await api.delete(`sections/${id}/`);
         setSections(sections.filter(s => s.id !== id));
     };
@@ -80,9 +78,13 @@ const Sections = () => {
                         <option value="">Dept...</option>
                         {departments.map(d => <option key={d.id} value={d.id}>{d.code}</option>)}
                     </select>
-                    <select name="program" value={formData.program} onChange={handleChange} className="p-2 border rounded-lg text-sm md:col-span-2" required>
+                    <select name="program" value={formData.program} onChange={handleChange} className="p-2 border rounded-lg text-sm" required>
                         <option value="">Program...</option>
                         {programs.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
+                    </select>
+                    <select name="academic_year" value={formData.academic_year} onChange={handleChange} className="p-2 border rounded-lg text-sm" required>
+                        <option value="">Year...</option>
+                        {academicYears.map(y => <option key={y.id} value={y.id}>{y.label}</option>)}
                     </select>
                     
                     <button type="submit" className="bg-fuchsia-600 text-white p-2 rounded-lg text-sm font-medium hover:bg-fuchsia-700 flex items-center justify-center gap-2"><PlusCircle size={16} /> Add</button>

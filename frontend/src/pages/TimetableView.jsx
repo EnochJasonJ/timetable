@@ -29,8 +29,13 @@ const TimetableView = () => {
                 setEntries(entRes.data);
 
                 const slotRes = await api.get('timeslots/');
+                // Group by slot_number but keep earliest start time if there are overlaps
+                // Actually, we want to show ALL slots that the GA can use.
+                // For the header, we'll use a representative set of slot numbers.
                 const uniqueSlotsMap = new Map();
-                for (const slot of slotRes.data) {
+                const sortedAllSlots = [...slotRes.data].sort((a,b) => a.slot_number - b.slot_number);
+                
+                for (const slot of sortedAllSlots) {
                     if (!uniqueSlotsMap.has(slot.slot_number)) {
                         uniqueSlotsMap.set(slot.slot_number, slot);
                     }
@@ -81,17 +86,34 @@ const TimetableView = () => {
         </div>
     );
 
+    // Build a map: slot_number -> index in the sorted slots array
+    const slotIndexMap = new Map();
+    slots.forEach((s, idx) => slotIndexMap.set(s.slot_number, idx));
+
     const gridData = {};
     entries.forEach(entry => {
         const day = entry.time_slot.day;
-        const slotNum = entry.time_slot.slot_number;
+        const startSlotNum = entry.time_slot.slot_number;
         if (!gridData[day]) gridData[day] = {};
-        gridData[day][slotNum] = { ...entry, is_continuation: false };
+
+        // Always mark the starting slot
+        gridData[day][startSlotNum] = { ...entry, is_continuation: false };
+
         if (entry.duration_slots > 1) {
-            for (let i = 1; i < entry.duration_slots; i++) {
-                if (!gridData[day][slotNum + i]) {
-                    gridData[day][slotNum + i] = { ...entry, is_continuation: true };
+            const startIdx = slotIndexMap.get(startSlotNum);
+            if (startIdx === undefined) return;
+
+            // Walk forward and mark REGULAR continuation slots.
+            // BREAK/LUNCH slots encountered in between are intentionally left unmarked so
+            // they render as normal separators ("split the break" behaviour).
+            let regularCount = 1; // start slot is the first REGULAR slot
+            for (let i = startIdx + 1; i < slots.length && regularCount < entry.duration_slots; i++) {
+                const s = slots[i];
+                if (s.slot_type === 'REGULAR') {
+                    gridData[day][s.slot_number] = { ...entry, is_continuation: true };
+                    regularCount++;
                 }
+                // BREAK/LUNCH left unmarked — will render as a normal break separator
             }
         }
     });
@@ -149,47 +171,73 @@ const TimetableView = () => {
                                 </th>
                                 {slots.map(s => (
                                     <th key={s.id} className="p-6 border-r border-slate-200 last:border-0 font-bold">
-                                        <div className="text-[10px] tracking-widest uppercase text-slate-400 mb-1 font-semibold">Period {s.slot_number}</div>
+                                        <div className="text-[10px] tracking-widest uppercase text-slate-400 mb-1 font-semibold">{s.label || `Period ${s.slot_number}`}</div>
                                         <div className="text-sm font-extrabold text-slate-900 tracking-tight">{s.start_time.slice(0,5)} — {s.end_time.slice(0,5)}</div>
                                     </th>
                                 ))}
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-200">
-                            {['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'].map(dayName => {
-                                const dayCode = dayName.slice(0,3);
+                            {[
+                                {name: 'MONDAY', code: 'MON'},
+                                {name: 'TUESDAY', code: 'TUE'},
+                                {name: 'WEDNESDAY', code: 'WED'},
+                                {name: 'THURSDAY', code: 'THU'},
+                                {name: 'FRIDAY', code: 'FRI'},
+                                {name: 'SATURDAY', code: 'SAT'}
+                            ].map(day => {
+                                const dayCode = day.code;
                                 return (
-                                    <tr key={dayName} className="group/row bg-white hover:bg-slate-50/30 transition-colors">
+                                    <tr key={day.name} className="group/row bg-white hover:bg-slate-50/30 transition-colors">
                                         <td className="p-6 border-r border-slate-200 font-bold text-slate-500 bg-slate-50/50 uppercase text-[10px] tracking-[2px]">
-                                            {dayName}
+                                            {day.name}
                                         </td>
-                                        {slots.map((s, idx) => {
+                                        {slots.map((s) => {
                                             const cell = gridData[dayCode]?.[s.slot_number];
-                                            
-                                            if (['BREAK', 'LUNCH'].includes(s.slot_type)) {
+
+                                            // Lab continuation slot — render as a mini "continued" card
+                                            if (cell?.is_continuation) {
+                                                const isLab = cell.entry_type === 'LAB';
                                                 return (
-                                                    <td key={s.id} className="p-2 border-r border-slate-200 bg-slate-50/80 relative overflow-hidden">
-                                                        <div className="absolute inset-0 opacity-[0.03] mix-blend-multiply" style={{ backgroundImage: 'repeating-linear-gradient(45deg, #000 0, #000 1px, transparent 0, transparent 10px)' }} />
-                                                        <div className="relative writing-vertical mx-auto h-32 rotate-180 transform font-bold text-[10px] text-slate-300 uppercase tracking-[4px] select-none">
-                                                            {s.slot_type}
+                                                    <td key={s.id} className="p-2 border-r border-slate-200 relative">
+                                                        <div className={`p-3 rounded-lg border h-full flex flex-col items-center justify-center gap-1.5 relative overflow-hidden
+                                                            ${isLab ? 'bg-emerald-50/40 border-emerald-100' : 'bg-indigo-50/30 border-indigo-100'}`}>
+                                                            <div className={`absolute top-0 left-0 w-full h-1 ${isLab ? 'bg-emerald-400' : 'bg-indigo-500'}`} />
+                                                            <span className="block font-bold text-[10px] leading-tight tracking-tight uppercase text-slate-700 text-center">
+                                                                {cell.course_offering?.subject?.short_name || cell.subject_name}
+                                                            </span>
+                                                            <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">(cont.)</span>
                                                         </div>
                                                     </td>
                                                 );
                                             }
 
-                                            if (!cell) {
-                                                return <td key={s.id} className="p-2 border-r border-slate-200 relative">
-                                                    <div className="mx-auto w-1 h-1 bg-slate-100 rounded-full" />
-                                                </td>;
+                                            // Break/Lunch column
+                                            if (['BREAK', 'LUNCH'].includes(s.slot_type) && !cell) {
+                                                return (
+                                                    <td key={s.id} className="p-2 border-r border-slate-200 bg-slate-50/80 relative overflow-hidden">
+                                                        <div className="absolute inset-0 opacity-[0.03] mix-blend-multiply" style={{ backgroundImage: 'repeating-linear-gradient(45deg, #000 0, #000 1px, transparent 0, transparent 10px)' }} />
+                                                        <div className="relative writing-vertical mx-auto h-32 rotate-180 transform font-bold text-[10px] text-slate-300 uppercase tracking-[4px] select-none">
+                                                            {s.label || s.slot_type}
+                                                        </div>
+                                                    </td>
+                                                );
                                             }
 
-                                            if (cell.is_continuation) return null;
+                                            // Empty regular slot
+                                            if (!cell) {
+                                                return (
+                                                    <td key={s.id} className="p-2 border-r border-slate-200 relative">
+                                                        <div className="mx-auto w-1 h-1 bg-slate-100 rounded-full" />
+                                                    </td>
+                                                );
+                                            }
 
-                                            const isLab = cell.subject_type === 'LAB';
-                                            const colSpan = cell.duration_slots;
+                                            // Regular or lab start cell (no colSpan — each column renders independently)
+                                            const isLab = cell.entry_type === 'LAB' || cell.course_offering?.subject?.subject_type === 'LAB';
 
                                             return (
-                                                <td key={s.id} className="p-2 border-r border-slate-200 relative group/cell" colSpan={colSpan}>
+                                                <td key={s.id} className="p-2 border-r border-slate-200 relative group/cell">
                                                     <div className={`
                                                         p-4 rounded-lg border transition-all duration-200 flex flex-col items-center gap-3 relative overflow-hidden h-full
                                                         ${isLab 
@@ -197,25 +245,31 @@ const TimetableView = () => {
                                                             : 'bg-indigo-50/30 border-indigo-100 text-slate-900 shadow-sm'}
                                                     `}>
                                                         <div className={`absolute top-0 left-0 w-full h-1 ${isLab ? 'bg-emerald-400' : 'bg-indigo-500'}`} />
-                                                        
+
                                                         <div className="text-center">
                                                             <span className="block text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-0.5">Course</span>
-                                                            <span className="block font-bold text-xs leading-tight tracking-tight uppercase text-slate-800">{cell.subject_name}</span>
-                                                            <span className="block text-[9px] font-medium text-slate-400 uppercase tracking-tighter mt-1">{cell.subject_code}</span>
+                                                            <span className="block font-bold text-xs leading-tight tracking-tight uppercase text-slate-800">
+                                                                {cell.course_offering?.subject?.short_name || cell.subject_name}
+                                                            </span>
+                                                            <span className="block text-[9px] font-medium text-slate-400 uppercase tracking-tighter mt-1">
+                                                                {cell.course_offering?.subject?.subject_code || cell.subject_code}
+                                                            </span>
                                                         </div>
-                                                        
+
                                                         <div className="flex flex-col gap-1.5 w-full pt-3 border-t border-slate-200/50 items-center mt-auto">
                                                             <div className="flex items-center gap-1.5">
                                                                 <UserIcon size={10} className="text-slate-400" />
-                                                                <span className="text-[9px] font-bold uppercase tracking-wide text-slate-500 truncate max-w-[100px]">{cell.faculty_name || 'TBA'}</span>
+                                                                <span className="text-[9px] font-bold uppercase tracking-wide text-slate-500 truncate max-w-[100px]">
+                                                                    {cell.faculty?.full_name || cell.faculty_name || 'TBA'}
+                                                                </span>
                                                             </div>
                                                             <div className="flex items-center gap-1.5 text-slate-400">
                                                                 <MapPin size={10} className="opacity-50" />
-                                                                <span className="text-[9px] font-bold uppercase tracking-widest leading-none">{cell.room_name || 'Hall A'}</span>
+                                                                <span className="text-[9px] font-bold uppercase tracking-widest leading-none">{cell.room?.name || cell.room_name || 'Hall A'}</span>
                                                             </div>
                                                         </div>
 
-                                                        {colSpan > 1 && (
+                                                        {isLab && (
                                                             <div className="absolute top-1.5 right-1.5 flex items-center gap-1 px-1.5 py-0.5 bg-white/60 rounded border border-white/80">
                                                                 <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Lab</span>
                                                             </div>

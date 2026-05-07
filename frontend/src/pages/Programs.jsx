@@ -21,11 +21,11 @@ const Programs = () => {
     });
 
     useEffect(() => {
-        fetchData();
+        fetchData(true);
     }, []);
 
-    const fetchData = async () => {
-        setLoading(true);
+    const fetchData = async (showLoader = false) => {
+        if (showLoader) setLoading(true);
         try {
             const [progRes, deptRes] = await Promise.all([
                 api.get('programs/'),
@@ -72,10 +72,10 @@ const Programs = () => {
     };
 
     const handleDelete = async (id) => {
-        if (!window.confirm('Delete this program? This may affect associated sections.')) return;
+        
         try {
             await api.delete(`programs/${id}/`);
-            fetchData();
+            setPrograms(programs.filter(p => p.id !== id));
         } catch (err) {
             alert('Delete failed');
         }

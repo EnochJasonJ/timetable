@@ -39,7 +39,6 @@ const Subjects = () => {
     };
 
     const handleDelete = async (id) => {
-        if (!window.confirm('Delete subject?')) return;
         await api.delete(`subjects/${id}/`);
         setSubjects(subjects.filter(s => s.id !== id));
     };

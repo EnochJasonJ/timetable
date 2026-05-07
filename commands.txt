@@ -1,0 +1,7 @@
+1. python manage.py runserver
+2. OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES celery -A Scheduler worker --loglevel=info -P solo
+3.  docker run -p 6379:6379 redis:latest
+4.  docker run -d --name tts-postgres \
+    -e POSTGRES_PASSWORD=postgres \
+    -e POSTGRES_DB=scheduler \
+    -p 5432:5432 postgres:trixie

@@ -23,7 +23,8 @@ from .decorators import (
     role_required, admin_required, management_required, staff_required,
     get_user_profile,
 )
-from .services import TimetableGenerator, ConflictChecker, GENERATION_STATE
+from django.core.cache import cache
+from .services import TimetableGenerator, ConflictChecker
 
 
 # ──────────────────────────────────────────────────────────────
@@ -50,10 +51,16 @@ def dashboard(request):
             'timetables': Timetable.objects.count(),
             'offerings': CourseOffering.objects.count(),
         }
-        try:
-            conflicts = ConflictChecker.get_all_conflicts()
-        except Exception:
-            conflicts = {'total': 0}
+        
+        # Conflict Summary - Cached for 5 minutes to prevent bottleneck
+        conflicts_cache_key = 'dashboard_conflicts_summary'
+        conflicts = cache.get(conflicts_cache_key)
+        if conflicts is None:
+            try:
+                conflicts = ConflictChecker.get_all_conflicts()
+                cache.set(conflicts_cache_key, conflicts, 300)
+            except Exception:
+                conflicts = {'total': 0}
 
         recent_timetables = Timetable.objects.select_related(
             'section__program', 'section__department', 'academic_year'
@@ -86,12 +93,16 @@ def timetable_generate(request):
 
             if schedule:
                 timetables = generator.save_results()
+                # Try to get generation num from cache for success message
+                state = cache.get(generator.task_id)
+                gen_num = state['generation_num'] if state else max_gens
+                
                 messages.success(
                     request,
                     f'Timetable generated successfully! '
                     f'Fitness: {schedule.fitness:.2%}, '
                     f'Conflicts: {schedule.conflicts}, '
-                    f'Generations: {GENERATION_STATE["generation_num"]}'
+                    f'Generations: {gen_num}'
                 )
                 if timetables:
                     return redirect('timetable_view', pk=timetables[0].id)
@@ -738,18 +749,36 @@ def user_role_edit(request, pk):
 
 def api_gen_progress(request):
     """Return current generation progress for the loader."""
+    task_id = request.GET.get('task_id')
+    
+    if task_id:
+        state = cache.get(task_id)
+        if state:
+            return JsonResponse({
+                'running': state['running'],
+                'generation': state['generation_num'],
+                'fitness': round(state['fitness'] * 100, 1),
+                'total': state['total_generations'],
+                'terminate': state['terminate'],
+            })
+
     return JsonResponse({
-        'running': GENERATION_STATE['running'],
-        'generation': GENERATION_STATE['generation_num'],
-        'fitness': round(GENERATION_STATE['fitness'] * 100, 1),
-        'total': GENERATION_STATE['total_generations'],
-        'terminate': GENERATION_STATE['terminate'],
+        'running': False,
+        'generation': 0,
+        'fitness': 0.0,
+        'total': 0,
+        'terminate': False,
     })
 
 
 def api_stop_generation(request):
-    """Signal the generator to stop."""
-    GENERATION_STATE['terminate'] = True
+    """Signal the generator to stop for a specific task."""
+    task_id = request.POST.get('task_id')
+    if task_id:
+        state = cache.get(task_id)
+        if state:
+            state['terminate'] = True
+            cache.set(task_id, state, timeout=3600)
     return redirect('dashboard')
 
 

@@ -14,7 +14,10 @@ const Layout = ({ children }) => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const location = useLocation();
 
-    // Updated navigation to match the screenshot exactly
+    // Check permissions
+    const canManage = ['SUPER_ADMIN', 'TIMETABLE_ADMIN', 'HOD'].includes(user?.role);
+    const isStaff = ['SUPER_ADMIN', 'TIMETABLE_ADMIN', 'HOD', 'FACULTY'].includes(user?.role);
+
     const navCategories = [
         {
             title: 'OVERVIEW',
@@ -26,38 +29,50 @@ const Layout = ({ children }) => {
             title: 'TIMETABLES',
             items: [
                 { path: '/timetables', label: 'All Timetables', icon: Calendar },
-                { path: '/timetables/generate', label: 'Generate', icon: Wand2 },
+                { path: '/timetables/generate', label: 'Generate', icon: Wand2, roles: ['SUPER_ADMIN', 'TIMETABLE_ADMIN', 'HOD'] },
                 { path: '/timetables/master', label: 'Master Timetable', icon: LayoutGrid },
             ]
         },
         {
             title: 'ACADEMIC SETUP',
+            roles: ['SUPER_ADMIN', 'TIMETABLE_ADMIN', 'HOD'],
             items: [
-                { path: '/departments', label: 'Departments', icon: Network, adminOnly: true },
-                { path: '/programs', label: 'Programs', icon: GraduationCap, adminOnly: true },
-                { path: '/academic-years', label: 'Academic Years', icon: CalendarDays, adminOnly: true },
-                { path: '/subjects', label: 'Subjects', icon: BookOpen, adminOnly: true },
-                { path: '/sections', label: 'Sections', icon: Box, adminOnly: true },
-                { path: '/course-offerings', label: 'Course Offerings', icon: BookMarked, adminOnly: true },
+                { path: '/departments', label: 'Departments', icon: Network },
+                { path: '/programs', label: 'Programs', icon: GraduationCap },
+                { path: '/academic-years', label: 'Academic Years', icon: CalendarDays },
+                { path: '/subjects', label: 'Subjects', icon: BookOpen },
+                { path: '/sections', label: 'Sections', icon: Box },
+                { path: '/course-offerings', label: 'Course Offerings', icon: BookMarked },
             ]
         },
         {
             title: 'INFRASTRUCTURE',
+            roles: ['SUPER_ADMIN', 'TIMETABLE_ADMIN', 'HOD'],
             items: [
-                { path: '/faculty', label: 'Faculty', icon: Contact, adminOnly: true },
-                { path: '/rooms', label: 'Rooms', icon: Building2, adminOnly: true },
-                { path: '/time-slots', label: 'Time Slots', icon: Clock, adminOnly: true },
+                { path: '/faculty', label: 'Faculty', icon: Contact },
+                { path: '/rooms', label: 'Rooms', icon: Building2 },
+                { path: '/time-slots', label: 'Time Slots', icon: Clock },
             ]
         },
         {
             title: 'ADMINISTRATION',
+            roles: ['SUPER_ADMIN', 'TIMETABLE_ADMIN'],
             items: [
-                { path: '/users', label: 'Users & Roles', icon: Users, adminOnly: true },
+                { path: '/users', label: 'Users & Roles', icon: Users },
             ]
         }
     ];
 
-    const isAdmin = user?.role === 'SUPER_ADMIN' || user?.role === 'TIMETABLE_ADMIN';
+    const filteredNav = navCategories.filter(cat => {
+        if (cat.roles && !cat.roles.includes(user?.role)) return false;
+        return true;
+    }).map(cat => ({
+        ...cat,
+        items: cat.items.filter(item => {
+            if (item.roles && !item.roles.includes(user?.role)) return false;
+            return true;
+        })
+    })).filter(cat => cat.items.length > 0);
 
     return (
         <div className="min-h-screen bg-[#F8FAFC] flex text-slate-900 font-sans">
@@ -95,14 +110,13 @@ const Layout = ({ children }) => {
 
                     {/* Navigation */}
                     <nav className="flex-1 overflow-y-auto pt-4 px-4 space-y-7 custom-scrollbar pb-10">
-                        {navCategories.map((category) => (
+                        {filteredNav.map((category) => (
                             <div key={category.title} className="space-y-1">
                                 <h3 className="px-3 text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-3">
                                     {category.title}
                                 </h3>
                                 <div className="space-y-0.5">
                                     {category.items.map((item) => {
-                                        if (item.adminOnly && !isAdmin) return null;
                                         const isActive = location.pathname === item.path;
                                         return (
                                             <Link

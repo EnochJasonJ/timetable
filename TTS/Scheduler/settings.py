@@ -59,11 +59,30 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Scheduler.wsgi.application'
 
+import dj_database_url
+import os
+
 # Database
 DATABASES = {
+    'default': dj_database_url.config(
+        default='postgres://postgres:postgres@127.0.0.1:5433/scheduler',
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
+}
+
+# Redis & Celery Config
+REDIS_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
+
+CELERY_BROKER_URL = REDIS_URL
+CELERY_RESULT_BACKEND = REDIS_URL
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+
+CACHES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': REDIS_URL,
     }
 }
 

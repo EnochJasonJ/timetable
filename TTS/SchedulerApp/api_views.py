@@ -1,7 +1,8 @@
 from rest_framework import viewsets
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import action, api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from django.core.cache import cache
 from .models import (
     Department, Program, AcademicYear, Room, TimeSlot, Faculty,
     Subject, Section, CourseOffering, Timetable, TimetableEntry, UserProfile
@@ -14,8 +15,12 @@ from .serializers import (
 )
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializers import CustomTokenObtainPairSerializer
-from .services import TimetableGenerator, ConflictChecker, GENERATION_STATE
-from rest_framework.decorators import action, api_view, permission_classes
+from .services import TimetableGenerator, ConflictChecker
+from .permissions import IsAdminOrHOD, IsAdmin
+from .tasks import run_generation_task
+import uuid
+import threading
+from django.db import close_old_connections
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
@@ -43,8 +48,14 @@ def api_dashboard_stats(request):
     ).order_by('-generated_at')[:5]
     recent_serializer = TimetableSerializer(recent_timetables, many=True)
     
-    # Conflict Summary
-    conflicts = ConflictChecker.get_all_conflicts()
+    # Conflict Summary - Cached for 5 minutes to prevent bottleneck
+    conflicts_cache_key = 'dashboard_conflicts_summary'
+    conflicts = cache.get(conflicts_cache_key)
+    
+    if conflicts is None:
+        conflicts = ConflictChecker.get_all_conflicts()
+        cache.set(conflicts_cache_key, conflicts, 300)
+    
     # Format conflicts for UI (serializing types that aren't JSON serializable)
     formatted_conflicts = []
     
@@ -79,47 +90,46 @@ def api_dashboard_stats(request):
         }
     })
 
-
 # Generic Viewsets for CRUD
 class DepartmentViewSet(viewsets.ModelViewSet):
     queryset = Department.objects.all()
     serializer_class = DepartmentSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAdminOrHOD]
 
 class FacultyViewSet(viewsets.ModelViewSet):
     queryset = Faculty.objects.all()
     serializer_class = FacultySerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAdminOrHOD]
 
 class SubjectViewSet(viewsets.ModelViewSet):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAdminOrHOD]
 
 class RoomViewSet(viewsets.ModelViewSet):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAdminOrHOD]
 
 class ProgramViewSet(viewsets.ModelViewSet):
     queryset = Program.objects.all()
     serializer_class = ProgramSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAdminOrHOD]
 
 class SectionViewSet(viewsets.ModelViewSet):
     queryset = Section.objects.all()
     serializer_class = SectionSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAdminOrHOD]
 
 class CourseOfferingViewSet(viewsets.ModelViewSet):
     queryset = CourseOffering.objects.all()
     serializer_class = CourseOfferingSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAdminOrHOD]
 
 class TimeSlotViewSet(viewsets.ModelViewSet):
     queryset = TimeSlot.objects.all()
     serializer_class = TimeSlotSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAdminOrHOD]
 
 class TimetableViewSet(viewsets.ModelViewSet):
     queryset = Timetable.objects.select_related(
@@ -137,12 +147,8 @@ class TimetableViewSet(viewsets.ModelViewSet):
         serializer = TimetableEntrySerializer(entries, many=True)
         return Response(serializer.data)
 
-
-import threading
-from django.db import close_old_connections
-
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated, IsAdminOrHOD])
 def api_generate_timetable(request):
     """Trigger the genetic algorithm to generate timetables in the background."""
     section_ids = request.data.get('sections', [])
@@ -154,21 +160,27 @@ def api_generate_timetable(request):
     sections = list(Section.objects.filter(id__in=section_ids))
     if not sections:
         return Response({'success': False, 'message': 'Invalid sections.'}, status=400)
+        
+    # Pre-flight check: Algorithm requires CourseOfferings and TimeSlots
+    if not CourseOffering.objects.filter(section__in=sections).exists():
+        return Response({'success': False, 'message': 'The selected sections have no course offerings assigned. Go to Academic Setup > Course Offerings to configure subjects and faculty for these sections first.'}, status=400)
+        
+    if not TimeSlot.objects.filter(slot_type='REGULAR').exists():
+        return Response({'success': False, 'message': 'No regular time slots are configured. Go to Academic Setup > Time Slots first.'}, status=400)
     
-    generator = TimetableGenerator(sections, int(max_gens))
-    task_id = generator.task_id
-
-    def run_generation():
-        try:
-            schedule = generator.generate()
-            if schedule:
-                generator.save_results()
-        finally:
-            close_old_connections()
-
-    thread = threading.Thread(target=run_generation)
-    thread.daemon = True
-    thread.start()
+    task_id = str(uuid.uuid4())
+    
+    state = {
+        'running': True,
+        'generation_num': 0,
+        'fitness': 0.0,
+        'terminate': False,
+        'total_generations': int(max_gens),
+        'timetable_ids': [],
+    }
+    cache.set(task_id, state, timeout=3600)
+    
+    run_generation_task.delay(section_ids, int(max_gens), task_id)
 
     return Response({
         'success': True,
@@ -180,13 +192,13 @@ def api_generate_timetable(request):
 class AcademicYearViewSet(viewsets.ModelViewSet):
     queryset = AcademicYear.objects.all()
     serializer_class = AcademicYearSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAdminOrHOD]
 
 
 class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = UserProfile.objects.select_related('user', 'department').all()
     serializer_class = UserProfileSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAdminOrHOD]
 
     def get_queryset(self):
         # Allow filtering by role
@@ -204,25 +216,28 @@ def api_gen_progress_v1(request):
     if not task_id:
         return Response({'success': False, 'message': 'task_id required.'}, status=400)
     
-    if task_id in GENERATION_STATE:
-        state = GENERATION_STATE[task_id]
+    state = cache.get(task_id)
+    if state:
         return Response({
             'running': state['running'],
             'generation': state['generation_num'],
             'fitness': round(state['fitness'] * 100, 1),
             'total': state['total_generations'],
             'terminate': state['terminate'],
+            'timetable_ids': state.get('timetable_ids', []),
         })
     return Response({'running': False, 'message': 'Task not found.'}, status=404)
 
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated, IsAdminOrHOD])
 def api_stop_generation_v1(request):
     """Signal the generator to stop for a specific task."""
     task_id = request.data.get('task_id')
-    if task_id in GENERATION_STATE:
-        GENERATION_STATE[task_id]['terminate'] = True
+    state = cache.get(task_id)
+    if state:
+        state['terminate'] = True
+        cache.set(task_id, state, timeout=3600)
         return Response({'success': True, 'message': 'Termination signal sent.'})
     return Response({'success': False, 'message': 'Task not found.'}, status=404)
 

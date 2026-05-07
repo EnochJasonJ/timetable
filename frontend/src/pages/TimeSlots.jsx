@@ -36,11 +36,11 @@ const TimeSlots = () => {
     });
 
     useEffect(() => {
-        fetchData();
+        fetchData(true);
     }, []);
 
-    const fetchData = async () => {
-        setLoading(true);
+    const fetchData = async (showLoader = false) => {
+        if (showLoader) setLoading(true);
         try {
             const res = await api.get('timeslots/');
             setSlots(res.data);
@@ -92,10 +92,9 @@ const TimeSlots = () => {
     };
 
     const handleDelete = async (id) => {
-        if (!window.confirm('Delete this slot?')) return;
         try {
             await api.delete(`timeslots/${id}/`);
-            fetchData();
+            setSlots(slots.filter(s => s.id !== id));
         } catch (err) {
             alert('Delete failed');
         }

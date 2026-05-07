@@ -26,11 +26,11 @@ const CourseOfferings = () => {
     });
 
     useEffect(() => {
-        fetchData();
+        fetchData(true);
     }, []);
 
-    const fetchData = async () => {
-        setLoading(true);
+    const fetchData = async (showLoader = false) => {
+        if (showLoader) setLoading(true);
         try {
             const [offRes, subRes, secRes, facRes] = await Promise.all([
                 api.get('course-offerings/'),
@@ -67,11 +67,18 @@ const CourseOfferings = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        // Clean payload: empty strings to null for strict integer fields
+        const payload = { ...formData };
+        if (payload.weekly_hours_override === '') {
+            payload.weekly_hours_override = null;
+        }
+
         try {
             if (editingItem) {
-                await api.put(`course-offerings/${editingItem.id}/`, formData);
+                await api.put(`course-offerings/${editingItem.id}/`, payload);
             } else {
-                await api.post('course-offerings/', formData);
+                await api.post('course-offerings/', payload);
             }
             fetchData();
             setIsModalOpen(false);
@@ -81,10 +88,9 @@ const CourseOfferings = () => {
     };
 
     const handleDelete = async (id) => {
-        if (!window.confirm('Delete this offering?')) return;
         try {
             await api.delete(`course-offerings/${id}/`);
-            fetchData();
+            setOfferings(offerings.filter(o => o.id !== id));
         } catch (err) {
             alert('Delete failed');
         }
@@ -230,7 +236,7 @@ const CourseOfferings = () => {
                                                 ${formData.faculty.includes(f.id) ? 'bg-indigo-600 border-indigo-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-indigo-300'}
                                             `}
                                         >
-                                            <span className="truncate">{f.full_name}</span>
+                                            <span className="truncate">{f.first_name} {f.last_name}</span>
                                             {formData.faculty.includes(f.id) && <Check size={12} />}
                                         </div>
                                     ))}

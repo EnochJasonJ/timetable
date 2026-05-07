@@ -44,7 +44,6 @@ const Faculty = () => {
     };
 
     const handleDelete = async (id) => {
-        if (!window.confirm('Delete faculty?')) return;
         await api.delete(`faculty/${id}/`);
         setFaculty(faculty.filter(f => f.id !== id));
     };

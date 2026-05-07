@@ -30,7 +30,6 @@ const Timetables = () => {
     };
 
     const handleDelete = async (id) => {
-        if (!window.confirm('Permanent deletion will remove all grid entries. Confirm?')) return;
         try {
             await api.delete(`timetables/${id}/`);
             setTimetables(timetables.filter(t => t.id !== id));

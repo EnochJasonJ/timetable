@@ -41,6 +41,21 @@ class ScheduleData:
         self.lab_rooms = list(Room.objects.filter(room_type='LAB'))
         self.all_rooms = list(Room.objects.all())
 
+        # Library rooms: identified by room name or number containing "library" / "lib"
+        self.library_rooms = [
+            r for r in self.all_rooms
+            if 'library' in r.name.lower() or 'library' in r.number.lower() or 'lib' in r.number.lower()
+        ]
+
+        # Pre-assign ONE dedicated classroom per section so that all theory classes
+        # for a section always happen in the same room.
+        classrooms = self.rooms if self.rooms else [
+            r for r in self.all_rooms if r.room_type != 'LAB'
+        ]
+        self.section_classroom = {}
+        for i, section in enumerate(self.sections):
+            self.section_classroom[section.id] = classrooms[i % len(classrooms)] if classrooms else None
+
         # Only teaching slots (REGULAR type) for scheduling
         self.time_slots = list(
             TimeSlot.objects.filter(slot_type='REGULAR').order_by('day', 'slot_number')
@@ -51,11 +66,40 @@ class ScheduleData:
         for slot in self.time_slots:
             self.slots_by_day[slot.day].append(slot)
 
+        # Build "uninterrupted regular blocks" per day.
+        # A block is a maximal run of REGULAR slots with no BREAK/LUNCH between them
+        # (determined by scanning all slots ordered by slot_number per day).
+        # Labs MUST be scheduled within a single block so they never straddle a break.
+        all_slots_by_day = defaultdict(list)
+        for slot in TimeSlot.objects.order_by('slot_number'):
+            all_slots_by_day[slot.day].append(slot)
+
+        self.regular_blocks_by_day = defaultdict(list)  # day -> list of blocks (each block = list of REGULAR TimeSlots)
+        for day, day_all_slots in all_slots_by_day.items():
+            current_block = []
+            for slot in day_all_slots:
+                if slot.slot_type == 'REGULAR':
+                    current_block.append(slot)
+                else:
+                    if current_block:
+                        self.regular_blocks_by_day[day].append(current_block)
+                        current_block = []
+            if current_block:
+                self.regular_blocks_by_day[day].append(current_block)
+
         # Load course offerings for the target sections
         self.offerings = list(
             CourseOffering.objects.filter(
                 section__in=self.sections
             ).select_related('subject', 'section').prefetch_related('faculty')
+        )
+
+    @staticmethod
+    def is_library_subject(subject):
+        """Return True if the subject is a Library Hour (name / short_name contains 'library')."""
+        return (
+            'library' in subject.name.lower() or
+            'library' in subject.short_name.lower()
         )
 
     def get_rooms_for_type(self, subject_type):
@@ -64,29 +108,20 @@ class ScheduleData:
         return self.rooms if self.rooms else self.all_rooms
 
     def get_consecutive_slots(self, day, start_slot_number, count):
-        """Get `count` consecutive slots starting from EXACTLY `start_slot_number` on `day`."""
-        day_slots = self.slots_by_day.get(day, [])
-        result = []
-        
-        # Find the starting slot
-        start_idx = -1
-        for i, slot in enumerate(day_slots):
-            if slot.slot_number == start_slot_number:
-                start_idx = i
-                break
-        
-        if start_idx == -1:
-            return []
-            
-        # Check if we have enough slots following it
-        for i in range(start_idx, min(start_idx + count, len(day_slots))):
-            slot = day_slots[i]
-            if not result or slot.slot_number == result[-1].slot_number + 1:
-                result.append(slot)
-            else:
-                break
-                
-        return result if len(result) == count else []
+        """Get `count` consecutive REGULAR slots starting from `start_slot_number` on `day`.
+
+        Only returns slots within the same uninterrupted block (no BREAK/LUNCH between them).
+        Returns an empty list if the start slot is not found or there aren't enough
+        consecutive REGULAR slots in the same block.
+        """
+        for block in self.regular_blocks_by_day.get(day, []):
+            for i, slot in enumerate(block):
+                if slot.slot_number == start_slot_number:
+                    if i + count <= len(block):
+                        return block[i:i + count]
+                    else:
+                        return []  # Not enough slots in this block
+        return []
 
 
 # ──────────────────────────────────────────────────────────────
@@ -144,71 +179,123 @@ class Schedule:
         return self._conflicts
 
     def initialize(self):
-        """Create random class assignments from course offerings."""
-        for offering in self.data.offerings:
+        """Create random class assignments from course offerings.
+
+        Labs are processed first so they can be spread across different days per section
+        before theory classes fill the remaining slots.
+        """
+        # Track which days each section already has a lab on — to spread labs across days
+        section_lab_days = defaultdict(set)
+
+        # Separate lab and theory offerings; process labs first
+        lab_offerings = [o for o in self.data.offerings if o.subject.subject_type == 'LAB']
+        theory_offerings = [o for o in self.data.offerings if o.subject.subject_type != 'LAB']
+
+        for offering in lab_offerings + theory_offerings:
             weekly_hours = offering.effective_weekly_hours
             subject = offering.subject
 
             if subject.subject_type == 'LAB':
-                # Labs: schedule as multi-slot blocks
                 lab_slots_needed = subject.lab_duration_slots
                 sessions = weekly_hours // lab_slots_needed
                 remainder = weekly_hours % lab_slots_needed
-                
+
                 for _ in range(sessions):
                     cls = ScheduleClass(offering)
-                    self._assign_random(cls, is_lab=True)
+                    self._assign_random(cls, is_lab=True, section_lab_days=section_lab_days)
+                    if cls.time_slot:
+                        section_lab_days[cls.section.id].add(cls.time_slot.day)
                     self.classes.append(cls)
-                
-                # Handle remainder as smaller blocks or single slots
+
+                # Handle remainder as a smaller block
                 if remainder > 0:
                     cls = ScheduleClass(offering)
-                    cls.duration_slots = remainder # Adjust duration for the remainder
-                    self._assign_random(cls, is_lab=True)
+                    cls.duration_slots = remainder
+                    self._assign_random(cls, is_lab=True, section_lab_days=section_lab_days)
+                    if cls.time_slot:
+                        section_lab_days[cls.section.id].add(cls.time_slot.day)
                     self.classes.append(cls)
             else:
                 # Theory: one slot per session
-                sessions = weekly_hours
-                for _ in range(sessions):
+                for _ in range(weekly_hours):
                     cls = ScheduleClass(offering)
                     self._assign_random(cls, is_lab=False)
                     self.classes.append(cls)
 
         return self
 
-    def _assign_random(self, cls, is_lab=False):
-        """Assign a random time slot, room, and faculty to a class."""
+    def _assign_random(self, cls, is_lab=False, section_lab_days=None):
+        """Assign a random time slot, room, and faculty to a class.
+
+        For labs, only picks start positions within a single uninterrupted block of
+        REGULAR slots (no BREAK/LUNCH between), preferring days that don't already
+        have a lab for this section.
+        """
         slots = self.data.time_slots
         if not slots:
             return
 
         if is_lab and cls.duration_slots > 1:
-            # Try to assign consecutive slots for lab
             days = list(self.data.slots_by_day.keys())
             random.shuffle(days)
+
+            # Prefer days without an existing lab for this section
+            if section_lab_days and cls.section.id in section_lab_days:
+                used = section_lab_days[cls.section.id]
+                days = [d for d in days if d not in used] + [d for d in days if d in used]
+
             assigned = False
             for day in days:
-                day_slots = self.data.slots_by_day[day]
-                if len(day_slots) < cls.duration_slots:
-                    continue
-                start_idx = random.randrange(0, len(day_slots) - cls.duration_slots + 1)
-                start_slot = day_slots[start_idx]
-                consec = self.data.get_consecutive_slots(
-                    day, start_slot.slot_number, cls.duration_slots
-                )
-                if consec:
-                    cls.time_slot = consec[0]
+                # Collect valid start positions (within a single uninterrupted block)
+                valid_starts = []
+                for block in self.data.regular_blocks_by_day.get(day, []):
+                    if len(block) >= cls.duration_slots:
+                        for i in range(len(block) - cls.duration_slots + 1):
+                            valid_starts.append(block[i])
+
+                if valid_starts:
+                    cls.time_slot = random.choice(valid_starts)
                     assigned = True
                     break
+
             if not assigned:
-                cls.time_slot = random.choice(slots)
+                # Fallback: pick any regular slot that doesn't overflow the day's boundaries
+                valid_starts = []
+                for day, day_slots in self.data.slots_by_day.items():
+                    if len(day_slots) >= cls.duration_slots:
+                        for i in range(len(day_slots) - cls.duration_slots + 1):
+                            valid_starts.append(day_slots[i])
+                
+                if valid_starts:
+                    cls.time_slot = random.choice(valid_starts)
+                else:
+                    cls.time_slot = random.choice(slots)
         else:
             cls.time_slot = random.choice(slots)
 
-        # Assign room
-        rooms = self.data.get_rooms_for_type(cls.subject.subject_type)
-        if rooms:
-            cls.room = random.choice(rooms)
+        # ── Room assignment ──
+        # Rule 1: Lab subjects   → LAB room
+        # Rule 2: Library Hour   → Library room (room name/number contains 'library'/'lib')
+        # Rule 3: All other subjects → section's pre-assigned dedicated classroom
+        if cls.subject.subject_type == 'LAB':
+            rooms = self.data.lab_rooms if self.data.lab_rooms else self.data.all_rooms
+            if rooms:
+                cls.room = random.choice(rooms)
+        elif self.data.is_library_subject(cls.subject):
+            lib_rooms = self.data.library_rooms
+            if lib_rooms:
+                cls.room = lib_rooms[0]  # Typically only one library
+            elif self.data.all_rooms:
+                cls.room = random.choice(self.data.all_rooms)
+        else:
+            # Theory / Common / Elective → section's dedicated classroom
+            dedicated = self.data.section_classroom.get(cls.section.id)
+            if dedicated:
+                cls.room = dedicated
+            elif self.data.rooms:
+                cls.room = random.choice(self.data.rooms)
+            elif self.data.all_rooms:
+                cls.room = random.choice(self.data.all_rooms)
 
         # Assign faculty
         faculty_list = list(cls.offering.faculty.all())
@@ -219,6 +306,7 @@ class Schedule:
         """Calculate fitness based on conflicts. 1.0 = perfect.
 
         Penalty sources:
+        - Room type mismatch (wrong venue for subject type)
         - Room capacity mismatch
         - Double-booked faculty across sections
         - Double-booked section (same section, same time slot)
@@ -230,8 +318,26 @@ class Schedule:
         classes = self.classes
 
         for i in range(len(classes)):
+            cls = classes[i]
+
+            # ── Room-venue constraints ──
+            if cls.room:
+                if cls.subject.subject_type == 'LAB':
+                    # Lab must be in a LAB room
+                    if self.data.lab_rooms and cls.room not in self.data.lab_rooms:
+                        self._conflicts += 80
+                elif self.data.is_library_subject(cls.subject):
+                    # Library Hour must be in a library room
+                    if self.data.library_rooms and cls.room not in self.data.library_rooms:
+                        self._conflicts += 100
+                else:
+                    # Theory must be in the section's dedicated classroom
+                    dedicated = self.data.section_classroom.get(cls.section.id)
+                    if dedicated and cls.room.id != dedicated.id:
+                        self._conflicts += 60
+
             # Room capacity check
-            if classes[i].room and classes[i].room.seating_capacity < classes[i].subject.max_students:
+            if cls.room and cls.room.seating_capacity < cls.section.strength:
                 self._conflicts += 50
 
             for j in range(i + 1, len(classes)):
@@ -261,20 +367,37 @@ class Schedule:
                             classes[i].room.id == classes[j].room.id):
                         self._conflicts += 100
 
-        # ── Distribution penalty ──
-        # ── Distribution penalty ──
-        # Penalise uneven distribution: check each section-day for gaps
-        # and penalize same subject multiple times on same day
+        # ── Distribution & lab-spread penalties ──
+
+        # Heavy penalty: more than one lab session per section per day
+        section_day_labs = defaultdict(int)
+        for cls in classes:
+            if cls.time_slot and cls.entry_type == 'LAB':
+                section_day_labs[(cls.section.id, cls.time_slot.day)] += 1
+        for count in section_day_labs.values():
+            if count > 1:
+                self._conflicts += (count - 1) * 200
+
+        # Gap penalty: penalise unfilled regular slots per section per day.
+        # Use block structure to correctly track which regular slots are occupied.
         section_day_slots = defaultdict(set)
         section_day_subjects = defaultdict(list)
         for cls in classes:
             if cls.time_slot:
                 key = (cls.section.id, cls.time_slot.day)
-                section_day_slots[key].add(cls.time_slot.slot_number)
                 section_day_subjects[key].append(cls.subject.id)
+                # Mark occupied regular slot positions using blocks (no arithmetic across breaks)
+                day = cls.time_slot.day
+                start_num = cls.time_slot.slot_number
+                section_day_slots[key].add(start_num)
                 if cls.duration_slots > 1:
-                    for offset in range(1, cls.duration_slots):
-                        section_day_slots[key].add(cls.time_slot.slot_number + offset)
+                    for block in self.data.regular_blocks_by_day.get(day, []):
+                        for i, slot in enumerate(block):
+                            if slot.slot_number == start_num:
+                                for j in range(1, cls.duration_slots):
+                                    if i + j < len(block):
+                                        section_day_slots[key].add(block[i + j].slot_number)
+                                break
 
         available_days = list(self.data.slots_by_day.keys())
         available_per_day = {d: len(self.data.slots_by_day[d]) for d in available_days}
@@ -288,17 +411,14 @@ class Schedule:
                 if gap > 0:
                     # Square the gap so completely empty days are heavily penalized
                     self._conflicts += gap ** 2
-                
-                # Penalize multiple classes of same subject on same day
-                # (Labs with duration_slots > 1 will only add 1 subject to the list so that's fine)
-                # But if same theory subject is scheduled twice, penalize
+
+                # Penalize same theory subject appearing more than once on the same day
                 subjects_on_day = section_day_subjects.get(key, [])
                 if len(subjects_on_day) != len(set(subjects_on_day)):
                     from collections import Counter
                     counts = Counter(subjects_on_day)
                     for count in counts.values():
                         if count > 1:
-                            # Add heavily for each duplicate to discourage it
                             self._conflicts += (count - 1) * 3
 
         return 1.0 / (self._conflicts + 1)
@@ -389,37 +509,35 @@ class GeneticAlgorithm:
 # Timetable Generator (orchestrator)
 # ──────────────────────────────────────────────────────────────
 
-# Global state for progress tracking (keyed by task_id)
-GENERATION_STATE = {}
+from django.core.cache import cache
 
 
 class TimetableGenerator:
     """Orchestrates timetable generation for selected sections."""
 
-    def __init__(self, sections, max_generations=200):
+    def __init__(self, sections, max_generations=200, task_id=None):
         self.sections = sections
         self.max_generations = max_generations
         self.data = None
         self.best_schedule = None
-        # Create a unique task ID based on section IDs
-        self.task_id = ",".join(sorted([str(s.id) for s in sections]))
+        # Create a unique task ID based on section IDs or use provided
+        self.task_id = task_id or ",".join(sorted([str(s.id) for s in sections]))
 
     def generate(self):
         """Run the genetic algorithm and return the best schedule."""
-        global GENERATION_STATE
-
-        GENERATION_STATE[self.task_id] = {
+        state = {
             'running': True,
             'generation_num': 0,
             'fitness': 0.0,
             'terminate': False,
             'total_generations': self.max_generations,
+            'timetable_ids': [],
         }
+        cache.set(self.task_id, state, timeout=3600)
 
         self.data = ScheduleData(self.sections)
 
         if not self.data.offerings or not self.data.time_slots:
-            GENERATION_STATE[self.task_id]['running'] = False
             return None
 
         population = Population(POPULATION_SIZE, self.data)
@@ -428,20 +546,19 @@ class TimetableGenerator:
         ga = GeneticAlgorithm()
         self.best_schedule = population.schedules[0]
 
-        while (self.best_schedule.fitness != 1.0 and
-               GENERATION_STATE[self.task_id]['generation_num'] < self.max_generations):
-
-            if GENERATION_STATE[self.task_id]['terminate']:
+        while self.best_schedule.fitness != 1.0:
+            state = cache.get(self.task_id)
+            if not state or state.get('terminate') or state['generation_num'] >= self.max_generations:
                 break
 
             population = ga.evolve(population)
             population.schedules.sort(key=lambda s: s.fitness, reverse=True)
             self.best_schedule = population.schedules[0]
 
-            GENERATION_STATE[self.task_id]['generation_num'] += 1
-            GENERATION_STATE[self.task_id]['fitness'] = self.best_schedule.fitness
+            state['generation_num'] += 1
+            state['fitness'] = self.best_schedule.fitness
+            cache.set(self.task_id, state, timeout=3600)
 
-        GENERATION_STATE[self.task_id]['running'] = False
         return self.best_schedule
 
     def save_results(self):
@@ -453,9 +570,8 @@ class TimetableGenerator:
         academic_year = None
         
         # Get generation info from state if available
-        gen_num = 0
-        if self.task_id in GENERATION_STATE:
-            gen_num = GENERATION_STATE[self.task_id]['generation_num']
+        state = cache.get(self.task_id)
+        gen_num = state['generation_num'] if state else 0
 
         for section in self.sections:
             academic_year = section.academic_year
@@ -471,7 +587,7 @@ class TimetableGenerator:
                 academic_year=academic_year,
                 status='DRAFT',
                 fitness_score=self.best_schedule.fitness,
-                generations_run=GENERATION_STATE['generation_num'],
+                generations_run=gen_num,
             )
             timetables[section.id] = tt
 
@@ -494,6 +610,11 @@ class TimetableGenerator:
             entries.append(entry)
 
         TimetableEntry.objects.bulk_create(entries)
+        
+        if state:
+            state['timetable_ids'] = [tt.id for tt in timetables.values()]
+            cache.set(self.task_id, state, timeout=3600)
+            
         return list(timetables.values())
 
 

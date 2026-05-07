@@ -44,7 +44,6 @@ const Departments = () => {
     };
 
     const handleDelete = async (id) => {
-        if (!window.confirm('Are you sure you want to delete this department?')) return;
         try {
             await api.delete(`departments/${id}/`);
             fetchDepartments();
